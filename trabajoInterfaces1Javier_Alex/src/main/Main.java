@@ -30,12 +30,16 @@ public class Main {
 				int num = Integer.parseInt(sc.nextLine());
 				switch (num) {
 				case 0:
-					System.out.println("Hasta luego");
-					salir = true;
+					salir = menu_0();
 					break;
 				case 1: 
+					menu_1(lsql);
+					break;
+				case 2:
+					System.out.println("Escribe el nombre de un libro");
+					String titulo = sc.nextLine();
 					List<Libro> lista = lsql.obtenerTodos();
-					lista.stream().forEach(libro -> System.out.println(libro));
+					lista.stream().filter(libro -> libro.getTitulo().equals(titulo)).forEach(libro -> System.out.println(libro));
 					break;
 				default:
 					System.out.println("Lo escrito no esta en el menu");
@@ -45,5 +49,17 @@ public class Main {
 			}
 		} while (salir != true);
 		sc.close();
+	}
+
+	private static void menu_1(LibroSQL lsql) {
+		List<Libro> lista = lsql.obtenerTodos();
+		lista.stream().forEach(libro -> System.out.println(libro));
+	}
+
+	private static boolean menu_0() {
+		boolean salir;
+		System.out.println("Hasta luego");
+		salir = true;
+		return salir;
 	}
 }
