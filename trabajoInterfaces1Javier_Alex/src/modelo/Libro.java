@@ -12,6 +12,12 @@ public class Libro {
 		super();
 	}
 
+	
+	public Libro(String titulo, String autor, Double precio, int stock) {
+		this(0,titulo,autor,precio,stock);
+	}
+
+
 	public Libro(int id, String titulo, String autor, Double precio, int stock) {
 		super();
 		this.id = id;
