@@ -11,7 +11,7 @@ public class Conexion {
 
 			String user = "root";
 			String pwd = "";
-			String url = "jdbc:mysql://localhost:3306/dam_programacion";
+			String url = "jdbc:mysql://localhost:3306/interfaces";
 			Connection con = DriverManager.getConnection(url, user, pwd);
 			return con;
 		} catch (SQLException e) {
