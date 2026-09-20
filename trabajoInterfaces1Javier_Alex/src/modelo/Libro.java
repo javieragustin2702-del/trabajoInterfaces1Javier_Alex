@@ -2,7 +2,7 @@ package modelo;
 
 public class Libro {
 
-	String id;
+	int id;
 	String titulo;
 	String autor;
 	Double precio;
@@ -12,7 +12,7 @@ public class Libro {
 		super();
 	}
 
-	public Libro(String id, String titulo, String autor, Double precio, int stock) {
+	public Libro(int id, String titulo, String autor, Double precio, int stock) {
 		super();
 		this.id = id;
 		this.titulo = titulo;
@@ -21,11 +21,11 @@ public class Libro {
 		Stock = stock;
 	}
 
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 
