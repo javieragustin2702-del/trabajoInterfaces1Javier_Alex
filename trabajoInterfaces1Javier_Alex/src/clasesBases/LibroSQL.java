@@ -15,10 +15,15 @@ public class LibroSQL implements OperacionesBases<Libro> {
 	@Override
 	public boolean insertar(Libro objeto) {
 		String sql = """
-				insert libro (titulo,autor,precio,stock)
-				values(?,?,?,?)
+				insert libro (idlibro,titulo,autor,precio,stock)
+				values(?,?,?,?,?)
 				""";
 		try (Connection con = Conexion.getConnection();PreparedStatement ps = con.prepareStatement(sql)){
+			ps.setInt(1, objeto.getId());
+			ps.setString(2, objeto.getTitulo());
+			ps.setString(3, objeto.getAutor());
+			ps.setDouble(4, objeto.getPrecio());
+			ps.setInt(5, objeto.getStock());
 			int filas = ps.executeUpdate();
 			if (filas > 0) {
 				return true;
@@ -91,7 +96,6 @@ public class LibroSQL implements OperacionesBases<Libro> {
 	public boolean eliminar(int id) {
 		String sql = """
 				delee from libro where id = ?
-				values(?,?,?,?)
 				""";
 		try (Connection con = Conexion.getConnection();PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);

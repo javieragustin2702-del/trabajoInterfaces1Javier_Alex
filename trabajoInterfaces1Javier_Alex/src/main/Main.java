@@ -47,7 +47,9 @@ public class Main {
 				case 5:
 					menu_5(sc, lsql);
 					break;
-				
+				case 6:
+					menu_6(sc, lsql);
+					break;
 				default:
 					System.out.println("Lo escrito no esta en el menu");
 				}
@@ -56,6 +58,25 @@ public class Main {
 			}
 		} while (salir != true);
 		sc.close();
+	}
+
+	private static void menu_6(Scanner sc, LibroSQL lsql) {
+		System.out.println("Escribe el id del libro");
+		int id = Integer.parseInt(sc.nextLine());
+		System.out.println("su título");
+		String titulo = sc.nextLine();
+		System.out.println("su autor");
+		String autor = sc.nextLine();
+		System.out.println("su precio");
+		double precio = Double.parseDouble(sc.nextLine());
+		System.out.println("su stock");
+		int stock = Integer.parseInt(sc.nextLine());
+		Libro l = new Libro(id,titulo,autor,precio,stock);
+		if (lsql.insertar(l) == true) {
+			System.out.println("Insertado");
+		} else {
+			System.out.println("No se ha podido insertar");
+		}
 	}
 
 	private static void menu_5(Scanner sc, LibroSQL lsql) {
