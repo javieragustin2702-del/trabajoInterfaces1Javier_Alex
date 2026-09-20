@@ -95,7 +95,7 @@ public class LibroSQL implements OperacionesBases<Libro> {
 	@Override
 	public boolean eliminar(int id) {
 		String sql = """
-				delee from libro where id = ?
+				delete from libro where idlibro = ?
 				""";
 		try (Connection con = Conexion.getConnection();PreparedStatement ps = con.prepareStatement(sql)){
 			ps.setInt(1, id);

@@ -50,6 +50,9 @@ public class Main {
 				case 6:
 					menu_6(sc, lsql);
 					break;
+				case 7:
+					menu_7(sc, lsql);
+					break;
 				default:
 					System.out.println("Lo escrito no esta en el menu");
 				}
@@ -58,6 +61,16 @@ public class Main {
 			}
 		} while (salir != true);
 		sc.close();
+	}
+
+	private static void menu_7(Scanner sc, LibroSQL lsql) {
+		System.out.println("Escribe el id del libro");
+		int id = Integer.parseInt(sc.nextLine());
+		if(lsql.eliminar(id) == true) {
+			System.out.println("hecho");
+		} else {
+			System.out.println("No se ha podido hacer");
+		}
 	}
 
 	private static void menu_6(Scanner sc, LibroSQL lsql) {
