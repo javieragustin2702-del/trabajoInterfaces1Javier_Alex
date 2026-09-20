@@ -3,6 +3,7 @@ package main;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import clasesBases.LibroSQL;
 import modelo.Libro;
@@ -32,7 +33,7 @@ public class Main {
 				case 0:
 					salir = menu_0();
 					break;
-				case 1: 
+				case 1:
 					menu_1(lsql);
 					break;
 				case 2:
@@ -64,12 +65,25 @@ public class Main {
 	}
 
 	private static void menu_7(Scanner sc, LibroSQL lsql) {
-		System.out.println("Escribe el id del libro");
-		int id = Integer.parseInt(sc.nextLine());
-		if(lsql.eliminar(id) == true) {
-			System.out.println("hecho");
+		System.out.println("Escribe el titulo del libro");
+		String titulo = sc.nextLine();
+		List<Libro> lista = lsql.obtenerTodos();
+		List<Libro> iguales = lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).collect(Collectors.toList());
+		if (iguales.size() > 1) {
+			System.out.println("Hay varios libros con el mismo título.Escribe un id para elegir cual eliminar");
+			iguales.stream().forEach(libro -> System.out.println(libro));
+			int id = Integer.parseInt(sc.nextLine());
+			if (lsql.eliminar(id) == true) {
+				System.out.println("Eliminado");
+			} else {
+				System.out.println("No se ha podido eliminar");
+			}
 		} else {
-			System.out.println("No se ha podido hacer");
+			if (lsql.eliminar(iguales.getFirst().getId()) == true) {
+				System.out.println("Eliminado");
+			} else {
+				System.out.println("No se ha podido eliminar");
+			}
 		}
 	}
 
@@ -84,7 +98,7 @@ public class Main {
 		double precio = Double.parseDouble(sc.nextLine());
 		System.out.println("su stock");
 		int stock = Integer.parseInt(sc.nextLine());
-		Libro l = new Libro(id,titulo,autor,precio,stock);
+		Libro l = new Libro(id, titulo, autor, precio, stock);
 		if (lsql.insertar(l) == true) {
 			System.out.println("Insertado");
 		} else {
@@ -105,7 +119,8 @@ public class Main {
 		System.out.println("Escribe el precio máximo");
 		double max = Double.parseDouble(sc.nextLine());
 		List<Libro> lista = lsql.obtenerTodos();
-		lista.stream().filter(libro -> libro.getPrecio() >= min && libro.getPrecio() <= max).forEach(libro -> System.out.println(libro));
+		lista.stream().filter(libro -> libro.getPrecio() >= min && libro.getPrecio() <= max)
+				.forEach(libro -> System.out.println(libro));
 	}
 
 	private static void menu_3(Scanner sc, LibroSQL lsql) {
