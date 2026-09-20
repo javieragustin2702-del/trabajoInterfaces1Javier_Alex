@@ -36,10 +36,13 @@ public class Main {
 					menu_1(lsql);
 					break;
 				case 2:
-					System.out.println("Escribe el nombre de un libro");
-					String titulo = sc.nextLine();
-					List<Libro> lista = lsql.obtenerTodos();
-					lista.stream().filter(libro -> libro.getTitulo().equals(titulo)).forEach(libro -> System.out.println(libro));
+					menu_2(sc, lsql);
+					break;
+				case 3:
+					menu_3(sc, lsql);
+					break;
+				case 4:
+					menu_4(sc, lsql);
 					break;
 				default:
 					System.out.println("Lo escrito no esta en el menu");
@@ -49,6 +52,29 @@ public class Main {
 			}
 		} while (salir != true);
 		sc.close();
+	}
+
+	private static void menu_4(Scanner sc, LibroSQL lsql) {
+		System.out.println("Escribe el precio mínimo");
+		double min = Double.parseDouble(sc.nextLine());
+		System.out.println("Escribe el precio máximo");
+		double max = Double.parseDouble(sc.nextLine());
+		List<Libro> lista = lsql.obtenerTodos();
+		lista.stream().filter(libro -> libro.getPrecio() >= min && libro.getPrecio() <= max).forEach(libro -> System.out.println(libro));
+	}
+
+	private static void menu_3(Scanner sc, LibroSQL lsql) {
+		System.out.println("Escribe el nombre de un autor");
+		String titulo = sc.nextLine();
+		List<Libro> lista = lsql.obtenerTodos();
+		lista.stream().filter(libro -> libro.getAutor().equals(titulo)).forEach(libro -> System.out.println(libro));
+	}
+
+	private static void menu_2(Scanner sc, LibroSQL lsql) {
+		System.out.println("Escribe el nombre de un libro");
+		String titulo = sc.nextLine();
+		List<Libro> lista = lsql.obtenerTodos();
+		lista.stream().filter(libro -> libro.getTitulo().equals(titulo)).forEach(libro -> System.out.println(libro));
 	}
 
 	private static void menu_1(LibroSQL lsql) {
