@@ -1,6 +1,9 @@
 package main;
 
 public class Main {
-	//Este es el main tajo guapo
-	//Estamos probatineando
+
+	public static void main(String[] args) {
+	
+		
+	}
 }
