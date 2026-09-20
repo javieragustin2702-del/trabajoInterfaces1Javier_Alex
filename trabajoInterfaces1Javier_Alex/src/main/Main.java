@@ -44,6 +44,10 @@ public class Main {
 				case 4:
 					menu_4(sc, lsql);
 					break;
+				case 5:
+					menu_5(sc, lsql);
+					break;
+				
 				default:
 					System.out.println("Lo escrito no esta en el menu");
 				}
@@ -52,6 +56,13 @@ public class Main {
 			}
 		} while (salir != true);
 		sc.close();
+	}
+
+	private static void menu_5(Scanner sc, LibroSQL lsql) {
+		System.out.println("Escribe por el stock que quieres buscar");
+		int cantidad = Integer.parseInt(sc.nextLine());
+		List<Libro> lista = lsql.obtenerTodos();
+		lista.stream().filter(libro -> libro.getStock() >= cantidad).forEach(libro -> System.out.println(libro));
 	}
 
 	private static void menu_4(Scanner sc, LibroSQL lsql) {
