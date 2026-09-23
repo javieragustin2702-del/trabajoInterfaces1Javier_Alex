@@ -65,7 +65,7 @@ public class Main {
 						System.out.println("Lo escrito no esta en el menu");
 					}
 				} catch (Exception e) {
-					System.out.println("Error por no escribir un número");
+					System.out.println("Error por no escribir un número de los indicados");
 				}
 			} while (salir != true);
 		} else if (base.equals("txt")) {
@@ -78,12 +78,22 @@ public class Main {
 						MenuTXT.menu_1(ltxt);
 						break;
 					case 2:
-						System.out.println("Escribe el titulo del libro buscado");
-						String titulo = sc.nextLine();
-						List<Libro> lista = ltxt.obtenerTodos();
-						lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).forEach(libro -> System.out.println(libro));
-					default:
+						MenuTXT.menu_2(sc, ltxt);
 						break;
+					case 3:
+						menu_3(sc, ltxt);
+						break;
+					case 4:
+						menu_4(sc, ltxt);
+						break;
+					case 5:
+						System.out.println("Escribe el stock mínimo");
+						int stock = Integer.parseInt(sc.nextLine());
+						List<Libro> lista = ltxt.obtenerTodos();
+						lista.stream().filter(libro -> libro.getStock() >= stock).forEach(libro -> System.out.println(libro));
+						break;
+					default:
+						System.out.println("Lo escrito no esta en el menu");
 					}
 				} catch (Exception e) {
 					System.out.println("Error por no escribir un número");
@@ -92,6 +102,23 @@ public class Main {
 		}
 
 	}
+
+	public static void menu_4(Scanner sc, LibroTXT ltxt) {
+		System.out.println("Escribe el precio mínimo");
+		double min = Double.parseDouble(sc.nextLine());
+		System.out.println("Escribe el precio máximo");
+		double max = Double.parseDouble(sc.nextLine());
+		List<Libro> lista = ltxt.obtenerTodos();
+		lista.stream().filter(libro -> libro.getPrecio() >= min && libro.getPrecio() <= max).forEach(libro -> System.out.println(libro));
+	}
+
+	public static void menu_3(Scanner sc, LibroTXT ltxt) {
+		System.out.println("Escribe el autor");
+		String autor = sc.nextLine();
+		List<Libro> lista = ltxt.obtenerTodos();
+		lista.stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor)).forEach(libro -> System.out.println(libro));
+	}
+
 
 
 

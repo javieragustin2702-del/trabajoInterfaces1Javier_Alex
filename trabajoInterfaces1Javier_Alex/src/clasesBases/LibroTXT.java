@@ -1,7 +1,9 @@
 package clasesBases;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,27 @@ public class LibroTXT implements OperacionesBases<Libro> {
 
 	@Override
 	public boolean insertar(Libro objeto) {
-		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+		System.out.println("Escribe la ruta de la base de datos");
+		String ruta = sc.nextLine();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(ruta));
+			String linea = "";
+			while ((linea = br.readLine()) != null) {
+				String[] partes = linea.split(",");
+				if (Integer.parseInt(partes[0]) == objeto.getId()) {
+					System.out.println("id del libro pasado ya existe,cambie el id del libro");
+					return false;
+				}
+			}
+			br.close();
+			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta,true));
+			bw.write(objeto.getId() + "," + objeto.getTitulo() + "," + objeto.getAutor() + "," + objeto.getPrecio() + "," + objeto.getStock());
+			bw.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		sc.close();
 		return false;
 	}
 
