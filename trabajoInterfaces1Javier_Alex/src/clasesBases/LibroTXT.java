@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.Scanner;
 
 import modelo.Libro;
 
@@ -18,8 +20,11 @@ public class LibroTXT implements OperacionesBases<Libro> {
 
 	@Override
 	public List<Libro> obtenerTodos() {
+		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+		System.out.println("Escribe la ruta de la base de datos");
+		String ruta = sc.nextLine();
 		try {
-			BufferedReader br = new BufferedReader(new FileReader("D:\\Cosas de clase\\DAM\\Programación\\ejercicios\\pruebas\\src\\bases.txt"));
+			BufferedReader br = new BufferedReader(new FileReader(ruta));
 			List<Libro> lista = new ArrayList<Libro>();
 			String linea = "";
 			int id = 0;
@@ -49,12 +54,39 @@ public class LibroTXT implements OperacionesBases<Libro> {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		return null;
+		}
+		sc.close();
+		return null;
 	}
 
 	@Override
 	public Libro obtenerPorId(int id) {
-		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+		System.out.println("Escribe la ruta de la base de datos");
+		String ruta = sc.nextLine();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(ruta));
+			String linea = "";
+			String titulo = "";
+			String autor = "";
+			double precio = 0;
+			int stock = 0;
+			while ((linea = br.readLine()) != null) {
+				String[] partes = linea.split(",");
+				if (Integer.parseInt(partes[0]) == id) {
+					titulo = partes[1];
+					autor = partes[2];
+					precio = Double.parseDouble(partes[3]);
+					stock = Integer.parseInt(partes[4]);
+					return new Libro(id,titulo,autor,precio,stock);
+				}
+			}
+			br.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		sc.close();
 		return null;
 	}
 

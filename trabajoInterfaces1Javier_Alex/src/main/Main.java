@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 import clasesBases.LibroSQL;
 import clasesBases.LibroTXT;
+import clasesBases.MenuTXT;
 import modelo.Libro;
 
 public class Main {
@@ -68,18 +69,19 @@ public class Main {
 				}
 			} while (salir != true);
 		} else if (base.equals("txt")) {
-			System.out.println("Escribe la ruta de la base de datos");
-			String ruta = sc.nextLine();
 			do {
 				try {
 					System.out.println(menu);
 					int num = Integer.parseInt(sc.nextLine());
 					switch (num) {
 					case 1:
-						List<Libro> lista = ltxt.obtenerTodos();
-						lista.stream().forEach(libro -> System.out.println(libro));
+						MenuTXT.menu_1(ltxt);
 						break;
-
+					case 2:
+						System.out.println("Escribe el titulo del libro buscado");
+						String titulo = sc.nextLine();
+						List<Libro> lista = ltxt.obtenerTodos();
+						lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).forEach(libro -> System.out.println(libro));
 					default:
 						break;
 					}
@@ -90,6 +92,8 @@ public class Main {
 		}
 
 	}
+
+
 
 
 }
