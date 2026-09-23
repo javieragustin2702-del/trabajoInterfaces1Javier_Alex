@@ -26,6 +26,7 @@ public class Main {
 				6. Para insertar un libro
 				7. Para eliminar un libro
 				8. Para copiar todos los datos de un repositorio a otro
+				0. Para salir
 				""";
 		
 		System.out.println("Escribe txt para usar la base de datos txt o sql para usar la base de datos de mysql");
@@ -74,6 +75,10 @@ public class Main {
 					System.out.println(menu);
 					int num = Integer.parseInt(sc.nextLine());
 					switch (num) {
+					case 0:
+						salir = true;
+						System.out.println("hasta luego");
+						break;
 					case 1:
 						MenuTXT.menu_1(ltxt);
 						break;
@@ -81,16 +86,13 @@ public class Main {
 						MenuTXT.menu_2(sc, ltxt);
 						break;
 					case 3:
-						menu_3(sc, ltxt);
+						MenuTXT.menu_3(sc, ltxt);
 						break;
 					case 4:
-						menu_4(sc, ltxt);
+						MenuTXT.menu_4(sc, ltxt);
 						break;
 					case 5:
-						System.out.println("Escribe el stock mínimo");
-						int stock = Integer.parseInt(sc.nextLine());
-						List<Libro> lista = ltxt.obtenerTodos();
-						lista.stream().filter(libro -> libro.getStock() >= stock).forEach(libro -> System.out.println(libro));
+						MenuTXT.menu_5(sc, ltxt);
 						break;
 					default:
 						System.out.println("Lo escrito no esta en el menu");
@@ -99,28 +101,9 @@ public class Main {
 					System.out.println("Error por no escribir un número");
 				}
 			} while (salir != true);
+		} else {
+			System.out.println("no se ha escrito ni txt y sql por lo que va a terminar el programa");
 		}
 
 	}
-
-	public static void menu_4(Scanner sc, LibroTXT ltxt) {
-		System.out.println("Escribe el precio mínimo");
-		double min = Double.parseDouble(sc.nextLine());
-		System.out.println("Escribe el precio máximo");
-		double max = Double.parseDouble(sc.nextLine());
-		List<Libro> lista = ltxt.obtenerTodos();
-		lista.stream().filter(libro -> libro.getPrecio() >= min && libro.getPrecio() <= max).forEach(libro -> System.out.println(libro));
-	}
-
-	public static void menu_3(Scanner sc, LibroTXT ltxt) {
-		System.out.println("Escribe el autor");
-		String autor = sc.nextLine();
-		List<Libro> lista = ltxt.obtenerTodos();
-		lista.stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor)).forEach(libro -> System.out.println(libro));
-	}
-
-
-
-
-
 }

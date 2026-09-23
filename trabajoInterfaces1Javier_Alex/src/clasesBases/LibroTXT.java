@@ -16,9 +16,7 @@ public class LibroTXT implements OperacionesBases<Libro> {
 
 	@Override
 	public boolean insertar(Libro objeto) {
-		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
-		System.out.println("Escribe la ruta de la base de datos");
-		String ruta = sc.nextLine();
+		String ruta = obteneRuta();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(ruta));
 			String linea = "";
@@ -36,15 +34,12 @@ public class LibroTXT implements OperacionesBases<Libro> {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		sc.close();
 		return false;
 	}
 
 	@Override
 	public List<Libro> obtenerTodos() {
-		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
-		System.out.println("Escribe la ruta de la base de datos");
-		String ruta = sc.nextLine();
+		String ruta = obteneRuta();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(ruta));
 			List<Libro> lista = new ArrayList<Libro>();
@@ -77,15 +72,12 @@ public class LibroTXT implements OperacionesBases<Libro> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sc.close();
 		return null;
 	}
 
 	@Override
 	public Libro obtenerPorId(int id) {
-		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
-		System.out.println("Escribe la ruta de la base de datos");
-		String ruta = sc.nextLine();
+		String ruta =obteneRuta();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(ruta));
 			String linea = "";
@@ -108,8 +100,14 @@ public class LibroTXT implements OperacionesBases<Libro> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		sc.close();
 		return null;
+	}
+	
+	public String obteneRuta() {
+		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+		System.out.println("Escribe la ruta del archivo");
+		String ruta = sc.nextLine();
+		return ruta;
 	}
 
 	@Override
@@ -123,5 +121,7 @@ public class LibroTXT implements OperacionesBases<Libro> {
 		// TODO Auto-generated method stub
 		return false;
 	}
+	
+	
 
 }
