@@ -8,7 +8,7 @@ import io.github.cdimascio.dotenv.Dotenv;
 import java.sql.*;
 
 public class Conexion {
-	public static Connection conectar() throws SQLException {
+	public static Connection getConnection() throws SQLException {
  Dotenv env = Dotenv.load(); 
  String url = env.get("DB_URL"); 
  String user = env.get("DB_USER");
