@@ -4,21 +4,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import io.github.cdimascio.dotenv.Dotenv;
+import java.sql.*;
+
 public class Conexion {
-
-	public static Connection getConnection() {
-		try {
-
-			String url = System.getenv("DB_URL");
-			String user = System.getenv("DB_USER");
-			String pass = System.getenv("DB_PASS");
-			Connection con = DriverManager.getConnection(url, user, pass);
-			return con;
-		} catch (SQLException e) {
-
-			System.out.println(e);
-
-		}
-		return null;
-	}
+	public static Connection conectar() throws SQLException {
+ Dotenv env = Dotenv.load(); 
+ String url = env.get("DB_URL"); 
+ String user = env.get("DB_USER");
+ String pass = env.get("DB_PASS"); 
+ return DriverManager.getConnection(url, user, pass);
+		 }
 }
