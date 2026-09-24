@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 import clasesBases.LibroSQL;
 import clasesBases.LibroTXT;
-import clasesBases.MenuTXT;
 import modelo.Libro;
 
 public class Main {
@@ -101,6 +100,9 @@ public class Main {
 					case 7:
 						MenuTXT.menu_7(sc, ltxt);
 						break;
+					case 8:
+						MenuTXT.menu_8(lsql, ltxt);
+						break;
 					default:
 						System.out.println("Lo escrito no esta en el menu");
 					}
@@ -113,6 +115,8 @@ public class Main {
 		}
 
 	}
+
+
 
 
 

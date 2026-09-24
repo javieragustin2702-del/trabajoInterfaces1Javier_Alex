@@ -1,13 +1,18 @@
-package clasesBases;
+package main;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import clasesBases.LibroSQL;
+import clasesBases.LibroTXT;
 import modelo.Libro;
 
 public class MenuTXT {
-	
+	public static void menu_8(LibroSQL lsql, LibroTXT ltxt) {
+		List<Libro> lista = ltxt.obtenerTodos();
+		lista.stream().forEach(libro -> lsql.insertar(libro));
+	}
 	public static void menu_7(Scanner sc, LibroTXT ltxt) {
 		System.out.println("Escribe el titulo del libro");
 		String titulo = sc.nextLine();
