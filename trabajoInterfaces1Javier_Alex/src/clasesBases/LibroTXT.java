@@ -28,9 +28,12 @@ public class LibroTXT implements OperacionesBases<Libro> {
 				}
 			}
 			br.close();
-			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta,true));
-			bw.write(objeto.getId() + "," + objeto.getTitulo() + "," + objeto.getAutor() + "," + objeto.getPrecio() + "," + objeto.getStock());
+			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta, true));
+			bw.newLine();
+			bw.write(objeto.getId() + "," + objeto.getTitulo() + "," + objeto.getAutor() + "," + objeto.getPrecio()
+					+ "," + objeto.getStock());
 			bw.close();
+			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -44,32 +47,19 @@ public class LibroTXT implements OperacionesBases<Libro> {
 			BufferedReader br = new BufferedReader(new FileReader(ruta));
 			List<Libro> lista = new ArrayList<Libro>();
 			String linea = "";
-			int id = 0;
-			String titulo = "";
-			String autor = "";
-			double precio = 0;
-			int stock = 0;
+
 			while ((linea = br.readLine()) != null) {
 				String[] partes = linea.split(",");
-				for (int i = 0; i < partes.length; i++) {
-					if (i == 0) {
-						id = Integer.parseInt(partes[i]);
-					} else if (i == 1) {
-						titulo = partes [i];
-					} else if (i == 2) {
-						autor = partes[i];
-					} else if (i == 3) {
-						precio = Double.parseDouble(partes[i]);
-					} else {
-						stock = Integer.parseInt(partes[i]);
-					}
-				}
-				lista.add(new Libro(id,titulo,autor,precio,stock));
+				int id = Integer.parseInt(partes[0]);
+				String titulo = partes[1];
+				String autor = partes[2];
+				double precio = Double.parseDouble(partes[3]);
+				int stock = Integer.parseInt(partes[4]);
+				lista.add(new Libro(id, titulo, autor, precio, stock));
 			}
 			br.close();
 			return lista;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return null;
@@ -77,22 +67,19 @@ public class LibroTXT implements OperacionesBases<Libro> {
 
 	@Override
 	public Libro obtenerPorId(int id) {
-		String ruta =obteneRuta();
+		String ruta = obteneRuta();
 		try {
 			BufferedReader br = new BufferedReader(new FileReader(ruta));
 			String linea = "";
-			String titulo = "";
-			String autor = "";
-			double precio = 0;
-			int stock = 0;
+
 			while ((linea = br.readLine()) != null) {
 				String[] partes = linea.split(",");
 				if (Integer.parseInt(partes[0]) == id) {
-					titulo = partes[1];
-					autor = partes[2];
-					precio = Double.parseDouble(partes[3]);
-					stock = Integer.parseInt(partes[4]);
-					return new Libro(id,titulo,autor,precio,stock);
+					String titulo = partes[1];
+					String autor = partes[2];
+					double precio = Double.parseDouble(partes[3]);
+					int stock = Integer.parseInt(partes[4]);
+					return new Libro(id, titulo, autor, precio, stock);
 				}
 			}
 			br.close();
@@ -101,13 +88,6 @@ public class LibroTXT implements OperacionesBases<Libro> {
 			e.printStackTrace();
 		}
 		return null;
-	}
-	
-	public String obteneRuta() {
-		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
-		System.out.println("Escribe la ruta del archivo");
-		String ruta = sc.nextLine();
-		return ruta;
 	}
 
 	@Override
@@ -118,10 +98,42 @@ public class LibroTXT implements OperacionesBases<Libro> {
 
 	@Override
 	public boolean eliminar(int id) {
-		// TODO Auto-generated method stub
+		String ruta = obteneRuta();
+		List<String> lista = new ArrayList<String>();
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(ruta));
+			String linea = "";
+
+			while ((linea = br.readLine()) != null) {
+				String[] partes = linea.split(",");
+				if (Integer.parseInt(partes[0]) == id) {
+					continue;
+				} else {
+					lista.add(linea);
+				}
+			}
+			br.close();
+			BufferedWriter bw = new BufferedWriter(new FileWriter(ruta));
+			bw.write("");
+			bw.close();
+			BufferedWriter bw2 = new BufferedWriter(new FileWriter(ruta,true));
+			for (String string : lista) {
+				bw2.write(string);
+				bw2.newLine();
+			}
+			bw2.close();
+			return true;
+		} catch (Exception e) {
+			System.out.println(e);
+		}
 		return false;
 	}
-	
-	
+
+	public String obteneRuta() {
+		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
+		System.out.println("Escribe la ruta del archivo");
+		String ruta = sc.nextLine();
+		return ruta;
+	}
 
 }

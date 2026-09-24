@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
@@ -15,7 +16,7 @@ public class Main {
 		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
 		boolean salir = false;
 		LibroSQL lsql = new LibroSQL();
-		LibroTXT ltxt =new LibroTXT();
+		LibroTXT ltxt = new LibroTXT();
 		String menu = """
 				Escribe el numero:
 				1. Para mostrar todos los libros
@@ -28,7 +29,7 @@ public class Main {
 				8. Para copiar todos los datos de un repositorio a otro
 				0. Para salir
 				""";
-		
+
 		System.out.println("Escribe txt para usar la base de datos txt o sql para usar la base de datos de mysql");
 		String base = sc.nextLine();
 		if (base.equalsIgnoreCase("sql")) {
@@ -66,7 +67,7 @@ public class Main {
 						System.out.println("Lo escrito no esta en el menu");
 					}
 				} catch (Exception e) {
-					System.out.println("Error por no escribir un número de los indicados");
+					System.out.println(e);
 				}
 			} while (salir != true);
 		} else if (base.equals("txt")) {
@@ -94,11 +95,17 @@ public class Main {
 					case 5:
 						MenuTXT.menu_5(sc, ltxt);
 						break;
+					case 6:
+						MenuTXT.menu_6(sc, ltxt);
+						break;
+					case 7:
+						MenuTXT.menu_7(sc, ltxt);
+						break;
 					default:
 						System.out.println("Lo escrito no esta en el menu");
 					}
 				} catch (Exception e) {
-					System.out.println("Error por no escribir un número");
+					System.out.println(e);
 				}
 			} while (salir != true);
 		} else {
@@ -106,4 +113,8 @@ public class Main {
 		}
 
 	}
+
+
+
+
 }

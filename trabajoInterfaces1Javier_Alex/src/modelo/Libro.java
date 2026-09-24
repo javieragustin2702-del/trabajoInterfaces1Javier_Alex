@@ -5,7 +5,7 @@ public class Libro {
 	int id;
 	String titulo;
 	String autor;
-	Double precio;
+	double precio;
 	int Stock;
 
 	public Libro() {

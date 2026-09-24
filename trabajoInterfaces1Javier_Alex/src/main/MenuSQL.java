@@ -13,7 +13,8 @@ public class MenuSQL {
 		System.out.println("Escribe el titulo del libro");
 		String titulo = sc.nextLine();
 		List<Libro> lista = lsql.obtenerTodos();
-		List<Libro> iguales = lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).collect(Collectors.toList());
+		List<Libro> iguales = lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo))
+				.collect(Collectors.toList());
 		if (iguales.size() > 1) {
 			System.out.println("Hay varios libros con el mismo título.Escribe un id para elegir cual eliminar");
 			iguales.stream().forEach(libro -> System.out.println(libro));
@@ -86,5 +87,5 @@ public class MenuSQL {
 		List<Libro> lista = lsql.obtenerTodos();
 		lista.stream().forEach(libro -> System.out.println(libro));
 	}
-	
+
 }
