@@ -1,5 +1,9 @@
 package main;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -62,6 +66,20 @@ public class Main {
 					case 7:
 						MenuSQL.menu_7(sc, lsql);
 						break;
+					case 8:
+						List<Libro> lista = lsql.obtenerTodos();
+						System.out.println(lista);
+						try (BufferedWriter bw = new BufferedWriter(
+								new FileWriter("bases.txt", StandardCharsets.UTF_8))) {
+							/*for (String elemento : lista) {
+								bw.write(elemento);
+								bw.newLine(); // Salto de línea para cada elemento
+							}
+							System.out.println("¡Datos guardados con éxito en el archivo!");*/
+						} catch (IOException e) {
+							System.out.println("Ocurrió un error al escribir el archivo: " + e.getMessage());
+						}
+						break;
 					default:
 						System.out.println("Lo escrito no esta en el menu");
 					}
@@ -115,10 +133,5 @@ public class Main {
 		}
 
 	}
-
-
-
-
-
 
 }
