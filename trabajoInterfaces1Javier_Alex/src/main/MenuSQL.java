@@ -1,3 +1,4 @@
+//Tarea 1 del trabajo 1 Javier Agustin Garcia Bolea y Alex Daniel Musca
 package main;
 
 import java.util.List;
@@ -5,9 +6,15 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 import clasesBases.LibroSQL;
+import clasesBases.LibroTXT;
 import modelo.Libro;
 
 public class MenuSQL {
+
+	public static void menu_8(LibroSQL lsql, LibroTXT ltxt) {
+		List<Libro> lista = lsql.obtenerTodos();
+		lista.stream().forEach(libro -> ltxt.insertar(libro));
+	}
 
 	public static void menu_7(Scanner sc, LibroSQL lsql) {
 		System.out.println("Escribe el titulo del libro");
@@ -34,9 +41,7 @@ public class MenuSQL {
 	}
 
 	public static void menu_6(Scanner sc, LibroSQL lsql) {
-		System.out.println("Escribe el id del libro");
-		int id = Integer.parseInt(sc.nextLine());
-		System.out.println("su título");
+		System.out.println("Escribe el título");
 		String titulo = sc.nextLine();
 		System.out.println("su autor");
 		String autor = sc.nextLine();
@@ -44,7 +49,7 @@ public class MenuSQL {
 		double precio = Double.parseDouble(sc.nextLine());
 		System.out.println("su stock");
 		int stock = Integer.parseInt(sc.nextLine());
-		Libro l = new Libro(id, titulo, autor, precio, stock);
+		Libro l = new Libro(titulo, autor, precio, stock);
 		if (lsql.insertar(l) == true) {
 			System.out.println("Insertado");
 		} else {

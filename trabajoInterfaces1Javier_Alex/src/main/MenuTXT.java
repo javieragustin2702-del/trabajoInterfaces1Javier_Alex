@@ -1,3 +1,4 @@
+//Tarea 1 del trabajo 1 Javier Agustin Garcia Bolea y Alex Daniel Musca
 package main;
 
 import java.util.ArrayList;
@@ -13,24 +14,27 @@ public class MenuTXT {
 		List<Libro> lista = ltxt.obtenerTodos();
 		lista.stream().forEach(libro -> lsql.insertar(libro));
 	}
+
 	public static void menu_7(Scanner sc, LibroTXT ltxt) {
 		System.out.println("Escribe el titulo del libro");
 		String titulo = sc.nextLine();
 		List<Libro> lista = ltxt.obtenerTodos();
 		List<Libro> coinciden = new ArrayList<Libro>();
-		lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo)).forEach(libro -> coinciden.add(libro));
+		lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo))
+				.forEach(libro -> coinciden.add(libro));
 		if (coinciden.size() > 1) {
 			coinciden.stream().forEach(libro -> System.out.println(libro));
 			System.out.println("hay mas de un libro con el mismo título,escribe el id del que hay que eliminar");
 			int id = Integer.parseInt(sc.nextLine());
-			coinciden.stream().filter(libro -> libro.getId() == id).forEach(libro -> System.out.println(ltxt.eliminar(id)));
+			coinciden.stream().filter(libro -> libro.getId() == id)
+					.forEach(libro -> System.out.println(ltxt.eliminar(id)));
 		} else if (coinciden.size() == 0) {
 			System.out.println("No hay ningun libro con ese título");
 		} else {
 			System.out.println(ltxt.eliminar(coinciden.getFirst().getId()));
 		}
 	}
-	
+
 	public static void menu_6(Scanner sc, LibroTXT ltxt) {
 		System.out.println("Escribe el id del libro");
 		int id = Integer.parseInt(sc.nextLine());

@@ -1,3 +1,4 @@
+//Tarea 1 del trabajo 1 Javier Agustin Garcia Bolea y Alex Daniel Musca
 package clasesBases;
 
 import java.sql.Connection;
@@ -15,15 +16,14 @@ public class LibroSQL implements OperacionesBases<Libro> {
 	@Override
 	public boolean insertar(Libro objeto) {
 		String sql = """
-				insert libro (idlibro,titulo,autor,precio,stock)
-				values(?,?,?,?,?)
+				insert libro (titulo,autor,precio,stock)
+				values(?,?,?,?)
 				""";
 		try (Connection con = Conexion.getConnection();PreparedStatement ps = con.prepareStatement(sql)){
-			ps.setInt(1, objeto.getId());
-			ps.setString(2, objeto.getTitulo());
-			ps.setString(3, objeto.getAutor());
-			ps.setDouble(4, objeto.getPrecio());
-			ps.setInt(5, objeto.getStock());
+			ps.setString(1, objeto.getTitulo());
+			ps.setString(2, objeto.getAutor());
+			ps.setDouble(3, objeto.getPrecio());
+			ps.setInt(4, objeto.getStock());
 			int filas = ps.executeUpdate();
 			if (filas > 0) {
 				return true;
