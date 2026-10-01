@@ -8,7 +8,6 @@ public class Libro {
 	String autor;
 	double precio;
 	int Stock;
-
 	public Libro() {
 		super();
 	}
