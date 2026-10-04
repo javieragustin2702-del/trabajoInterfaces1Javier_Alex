@@ -9,13 +9,32 @@ import clasesBases.LibroSQL;
 import clasesBases.LibroTXT;
 import modelo.Libro;
 
+/**
+ * Opciones del menú para trabajar con la base de datos MySQL.
+ *
+ * @author Javier Agustin Garcia Bolea
+ * @author Alex Daniel Musca
+ * @version 1.0
+ */
 public class MenuSQL {
-
+	/**
+	 * Opción 8: copia todos los libros de la base de datos al fichero de texto.
+	 *
+	 * @param lsql repositorio de la base de datos (origen)
+	 * @param ltxt repositorio del fichero de texto (destino)
+	 */
 	public static void menu_8(LibroSQL lsql, LibroTXT ltxt) {
 		List<Libro> lista = lsql.obtenerTodos();
 		lista.stream().forEach(libro -> ltxt.insertar(libro));
 	}
 
+	/**
+	 * Opción 7: elimina un libro por su título. Si hay varios con el mismo título,
+	 * pide el id del que se quiere eliminar.
+	 *
+	 * @param sc   escáner para leer los datos por teclado
+	 * @param lsql repositorio de la base de datos
+	 */
 	public static void menu_7(Scanner sc, LibroSQL lsql) {
 		System.out.println("Escribe el titulo del libro");
 		String titulo = sc.nextLine();
@@ -40,6 +59,12 @@ public class MenuSQL {
 		}
 	}
 
+	/**
+	 * Opción 6: pide los datos de un libro y lo inserta en la base de datos.
+	 *
+	 * @param sc   escáner para leer los datos por teclado
+	 * @param lsql repositorio de la base de datos
+	 */
 	public static void menu_6(Scanner sc, LibroSQL lsql) {
 		System.out.println("Escribe el título");
 		String titulo = sc.nextLine();
@@ -57,6 +82,12 @@ public class MenuSQL {
 		}
 	}
 
+	/**
+	 * Opción 5: muestra los libros con un stock igual o superior al indicado.
+	 *
+	 * @param sc   escáner para leer los datos por teclado
+	 * @param lsql repositorio de la base de datos
+	 */
 	public static void menu_5(Scanner sc, LibroSQL lsql) {
 		System.out.println("Escribe por el stock que quieres buscar");
 		int cantidad = Integer.parseInt(sc.nextLine());
@@ -64,6 +95,12 @@ public class MenuSQL {
 		lista.stream().filter(libro -> libro.getStock() >= cantidad).forEach(libro -> System.out.println(libro));
 	}
 
+	/**
+	 * Opción 4: muestra los libros con un precio entre un mínimo y un máximo.
+	 *
+	 * @param sc   escáner para leer los datos por teclado
+	 * @param lsql repositorio de la base de datos
+	 */
 	public static void menu_4(Scanner sc, LibroSQL lsql) {
 		System.out.println("Escribe el precio mínimo");
 		double min = Double.parseDouble(sc.nextLine());
@@ -74,6 +111,12 @@ public class MenuSQL {
 				.forEach(libro -> System.out.println(libro));
 	}
 
+	/**
+	 * Opción 3: muestra los libros del autor indicado.
+	 *
+	 * @param sc   escáner para leer los datos por teclado
+	 * @param lsql repositorio de la base de datos
+	 */
 	public static void menu_3(Scanner sc, LibroSQL lsql) {
 		System.out.println("Escribe el nombre de un autor");
 		String titulo = sc.nextLine();
@@ -81,6 +124,12 @@ public class MenuSQL {
 		lista.stream().filter(libro -> libro.getAutor().equals(titulo)).forEach(libro -> System.out.println(libro));
 	}
 
+	/**
+	 * Opción 2: muestra los libros con el título indicado.
+	 *
+	 * @param sc   escáner para leer los datos por teclado
+	 * @param lsql repositorio de la base de datos
+	 */
 	public static void menu_2(Scanner sc, LibroSQL lsql) {
 		System.out.println("Escribe el nombre de un libro");
 		String titulo = sc.nextLine();
@@ -88,6 +137,11 @@ public class MenuSQL {
 		lista.stream().filter(libro -> libro.getTitulo().equals(titulo)).forEach(libro -> System.out.println(libro));
 	}
 
+	/**
+	 * Opción 1: muestra todos los libros.
+	 *
+	 * @param lsql repositorio de la base de datos
+	 */
 	public static void menu_1(LibroSQL lsql) {
 		List<Libro> lista = lsql.obtenerTodos();
 		lista.stream().forEach(libro -> System.out.println(libro));

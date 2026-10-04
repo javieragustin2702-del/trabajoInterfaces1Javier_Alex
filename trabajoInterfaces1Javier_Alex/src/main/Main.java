@@ -7,8 +7,21 @@ import java.util.Scanner;
 import clasesBases.LibroSQL;
 import clasesBases.LibroTXT;
 
+/**
+ * Clase principal: pregunta si se usa {@code sql} (MySQL) o {@code txt}
+ * (fichero de texto) y muestra el menú de gestión de libros hasta que el
+ * usuario elige salir.
+ *
+ * @author Javier Agustin Garcia Bolea
+ * @author Alex Daniel Musca
+ * @version 1.0
+ */
 public class Main {
-
+	/**
+	 * Inicia la aplicación y ejecuta el menú del repositorio elegido.
+	 *
+	 * @param args argumentos de la línea de comandos (no se usan)
+	 */
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in).useLocale(Locale.US);
 		boolean salir = false;
