@@ -9,7 +9,7 @@ import java.util.List;
  * 
  * @param <T> que es el Elemento esperado a ser convertido en Libro para su uso en LibroSQL y LibroTXT
  * @author Javier Agustin Garcia Bolea
- * @author Usuario Alex Daniel Musca
+ * @author Alex Daniel Musca
  * @version 1.0
  */
 public interface OperacionesBases<T> {
@@ -25,7 +25,7 @@ public interface OperacionesBases<T> {
 	 * Método que heredarán LibroSQL y LibroTXT que devuelve
 	 * una lista de todos los libros de las respectivas bases de datos
 	 * 
-	 * @return lista con todos los libros de la base de datos
+	 * @return Lista con todos los libros de la base de datos
 	 */
 	List<T> obtenerTodos();
 	/**
@@ -51,6 +51,7 @@ public interface OperacionesBases<T> {
 	 * true o false según se haya eliminido un libro o no.
 	 * 
 	 * Para ello el libro a eliminar se busca por su id
+	 * 
 	 * @param id que es el libro a eliminar
 	 * @return True o False según se elimine el libro o no
 	 */
