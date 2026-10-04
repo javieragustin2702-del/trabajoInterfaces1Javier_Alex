@@ -34,7 +34,7 @@ public interface OperacionesBases<T> {
 	 * mediante una búsqueda por su id
 	 * 
 	 * @param id que es el id por el que se quiere buscar un libro
-	 * @return
+	 * @return Libro obtenido por su id
 	 */
 	T obtenerPorId(int id);
 	/**

@@ -25,13 +25,13 @@ public class Conexion {
 	 * está en el proyecto. Los nombres para cada variable
 	 * dentro del .env son
 	 * 
-	 * <ul>>
+	 * <ul>
 	 * <li>DB_URL para ubicacion y puerto de la base de datos</li>
 	 * <li>DB_USER para el nombre de usurio de la base de datos</li>
 	 * <li>DB_PASS para la contraseña del usuario de la base de datos</li>
 	 * </ul>
 	 * @return {@code DriverManager.getConnection}
-	 * @throws SQLException
+	 * @throws SQLException 
 	 */
 	public static Connection getConnection() throws SQLException {
 		Dotenv env = Dotenv.load();
