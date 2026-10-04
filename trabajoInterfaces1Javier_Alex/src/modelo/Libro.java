@@ -132,7 +132,6 @@ public class Libro {
 	 * Establece el precio del libro.
 	 *
 	 * @param precio nuevo precio del libro; no debe ser {@code null}
-	 * @throws NullPointerException si {@code precio} es {@code null}
 	 */
 	public void setPrecio(Double precio) {
 		this.precio = precio;
