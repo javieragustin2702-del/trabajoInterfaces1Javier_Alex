@@ -8,6 +8,9 @@ import java.util.List;
  * Interfaz de la cual heredarán LibroSQL y LibroTXT sus métodos.
  * 
  * @param <T> que es el Elemento esperado a ser convertido en Libro para su uso en LibroSQL y LibroTXT
+ * @author Javier Agustin Garcia Bolea
+ * @author Usuario Alex Daniel Musca
+ * @version 1.0
  */
 public interface OperacionesBases<T> {
 	/**
