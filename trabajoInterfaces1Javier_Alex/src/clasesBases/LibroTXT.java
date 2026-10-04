@@ -25,7 +25,6 @@ public class LibroTXT implements OperacionesBases<Libro> {
 	 * si la base de datos esta escrita o no
 	 * 
 	 * @return True o false según se haya podido insertar el libro o no
-	 * @exception e en caso de 
 	 */
 	@Override
 	public boolean insertar(Libro objeto) {
@@ -54,7 +53,6 @@ public class LibroTXT implements OperacionesBases<Libro> {
 	 * siendo el 0 el id, el 1 el título, el 2 el autor, el 3 el precio y el 4 el stock
 	 * 
 	 * @return Lista de libros si no falla o devuelve null si falla
-	 * @exception {@code Exception} e en caso de no poder leer el txt
 	 */
 	@Override
 	public List<Libro> obtenerTodos() {
@@ -107,8 +105,7 @@ public class LibroTXT implements OperacionesBases<Libro> {
 	 * que se quería borrar
 	 * 
 	 * @return true si realiza todo o false si falla
-	 * @exception {@code Exception} e en caso de no poder leer el txt
-	 */
+¡	 */
 	@Override
 	public boolean eliminar(int id) {
 		List<String> lista = new ArrayList<String>();

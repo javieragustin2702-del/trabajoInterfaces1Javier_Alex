@@ -31,7 +31,7 @@ public class Conexion {
 	 * <li>DB_PASS para la contraseña del usuario de la base de datos</li>
 	 * </ul>
 	 * @return {@code DriverManager.getConnection}
-	 * @throws SQLException 
+	 * @throws SQLException en caso de dar error al acceder a la base de datos
 	 */
 	public static Connection getConnection() throws SQLException {
 		Dotenv env = Dotenv.load();

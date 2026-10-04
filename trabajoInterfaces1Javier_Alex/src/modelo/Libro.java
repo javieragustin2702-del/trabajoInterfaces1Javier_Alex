@@ -1,9 +1,15 @@
 // Tarea 1 del trabajo 1 Javier Agustin Garcia Bolea y Alex Daniel Musca
 package modelo;
 
+/**
+ * Clase que permite crear Libros. Cuenta con 5 atributos que son el id que es
+ * un int, el título que es un string, el autor que es un String, el precio que
+ * es un double y el stock que es un int
+ */
 public class Libro {
 	/**
-	 * Identificador único del libro si todavía no tiene ninguno asignado sale {@code 0}.
+	 * Identificador único del libro si todavía no tiene ninguno asignado sale
+	 * {@code 0}.
 	 */
 	int id;
 	/**
@@ -26,9 +32,9 @@ public class Libro {
 	/**
 	 * Crea un libro vacío, sin datos.
 	 *
-	 * El identificador, el precio y el stock valen {@code 0}, y el título y el autor son
-	 * {@code null}. Se usa junto con los métodos set para rellenar el libro campo a campo,
-	 * por ejemplo al leerlo de la base de datos.
+	 * El identificador, el precio y el stock valen {@code 0}, y el título y el
+	 * autor son {@code null}. Se usa junto con los métodos set para rellenar el
+	 * libro campo a campo, por ejemplo al leerlo de la base de datos.
 	 *
 	 */
 	public Libro() {
@@ -38,8 +44,8 @@ public class Libro {
 	/**
 	 * Crea un libro nuevo, todavía sin identificador.
 	 * 
-	 * El identificador se inicializa a {@code 0}. Es el constructor adecuado para los
-	 * libros que se van a insertar en la base de datos, que se encarga de
+	 * El identificador se inicializa a {@code 0}. Es el constructor adecuado para
+	 * los libros que se van a insertar en la base de datos, que se encarga de
 	 * asignarles su identificador.
 	 * 
 	 *
@@ -80,6 +86,7 @@ public class Libro {
 	public int getId() {
 		return id;
 	}
+
 	/**
 	 * Establece el identificador único del libro.
 	 *
@@ -88,6 +95,7 @@ public class Libro {
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	/**
 	 * Devuelve el título del libro.
 	 *
@@ -96,6 +104,7 @@ public class Libro {
 	public String getTitulo() {
 		return titulo;
 	}
+
 	/**
 	 * Establece el título del libro.
 	 * 
@@ -104,6 +113,7 @@ public class Libro {
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
+
 	/**
 	 * Devuelve el autor del libro.
 	 *
@@ -112,6 +122,7 @@ public class Libro {
 	public String getAutor() {
 		return autor;
 	}
+
 	/**
 	 * Establece el autor del libro.
 	 *
@@ -120,6 +131,7 @@ public class Libro {
 	public void setAutor(String autor) {
 		this.autor = autor;
 	}
+
 	/**
 	 * Devuelve el precio del libro.
 	 *
@@ -128,6 +140,7 @@ public class Libro {
 	public Double getPrecio() {
 		return precio;
 	}
+
 	/**
 	 * Establece el precio del libro.
 	 *
@@ -136,6 +149,7 @@ public class Libro {
 	public void setPrecio(Double precio) {
 		this.precio = precio;
 	}
+
 	/**
 	 * Devuelve las unidades disponibles en stock.
 	 *
@@ -144,6 +158,7 @@ public class Libro {
 	public int getStock() {
 		return Stock;
 	}
+
 	/**
 	 * Establece las unidades disponibles en stock.
 	 *
@@ -152,10 +167,12 @@ public class Libro {
 	public void setStock(int stock) {
 		Stock = stock;
 	}
+
 	/**
 	 * Devuelve una representación en texto del libro.
 	 * <p>
-	 * El formato es {@code Libro [id=..., titulo=..., autor=..., precio=..., Stock=...]}.
+	 * El formato es
+	 * {@code Libro [id=..., titulo=..., autor=..., precio=..., Stock=...]}.
 	 * </p>
 	 *
 	 * @return cadena con todos los atributos del libro
