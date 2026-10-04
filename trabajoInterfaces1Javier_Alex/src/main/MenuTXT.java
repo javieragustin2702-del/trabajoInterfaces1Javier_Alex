@@ -8,6 +8,7 @@ import java.util.Scanner;
 import clasesBases.LibroSQL;
 import clasesBases.LibroTXT;
 import modelo.Libro;
+
 /**
  * Opciones del menú para trabajar con el fichero de texto.
  *
@@ -17,7 +18,8 @@ import modelo.Libro;
  */
 public class MenuTXT {
 	/**
-	 * Opción 8: copia todos los libros del fichero de texto a la base de datos.
+	 * Opción 8: Guarda todos los datos de la base de datos txt en una lista para
+	 * insertalos todos después en la base de MySQL con .Stream.forEach
 	 *
 	 * @param lsql repositorio de la base de datos (destino)
 	 * @param ltxt repositorio del fichero de texto (origen)
@@ -26,11 +28,14 @@ public class MenuTXT {
 		List<Libro> lista = ltxt.obtenerTodos();
 		lista.stream().forEach(libro -> lsql.insertar(libro));
 	}
+
 	/**
-	 * Opción 7: elimina un libro por su título.
-	 * Si hay varios con el mismo título, pide el id del que se quiere eliminar.
+	 * Opción 7: Pide un título para obtener una lista con todos los libros, filtra
+	 * con un Stream.filter por titulo y si hay más de 1, pide el id para eliminar
+	 * según su id. La forma de eliminar es un .Stream.Filter.forEach a una lista
+	 * con todos los libros
 	 *
-	 * @param sc escáner para leer los datos por teclado
+	 * @param sc   escáner para leer los datos por teclado
 	 * @param ltxt repositorio del fichero de texto
 	 */
 	public static void menu_7(Scanner sc, LibroTXT ltxt) {
@@ -52,10 +57,12 @@ public class MenuTXT {
 			System.out.println(ltxt.eliminar(coinciden.getFirst().getId()));
 		}
 	}
+
 	/**
-	 * Opción 6: pide los datos de un libro (incluido el id) y lo guarda en el fichero.
+	 * Opción 6: pide los datos de un libro (incluido el id) y los guarda en el
+	 * fichero.
 	 *
-	 * @param sc escáner para leer los datos por teclado
+	 * @param sc   escáner para leer los datos por teclado
 	 * @param ltxt repositorio del fichero de texto
 	 */
 	public static void menu_6(Scanner sc, LibroTXT ltxt) {
@@ -71,10 +78,13 @@ public class MenuTXT {
 		int stock = Integer.parseInt(sc.nextLine());
 		System.out.println(ltxt.insertar(new Libro(id, titulo, autor, precio, stock)));
 	}
+
 	/**
-	 * Opción 5: muestra los libros con un stock igual o superior al indicado.
+	 * Opción 5: Guarda todos los datos de la base de datos txt en una lista y con
+	 * .Stream.Filter filtra para mostrar solo los que tiene el mismo o mayor stock
+	 * al indicado
 	 *
-	 * @param sc escáner para leer los datos por teclado
+	 * @param sc   escáner para leer los datos por teclado
 	 * @param ltxt repositorio del fichero de texto
 	 */
 	public static void menu_5(Scanner sc, LibroTXT ltxt) {
@@ -83,10 +93,12 @@ public class MenuTXT {
 		List<Libro> lista = ltxt.obtenerTodos();
 		lista.stream().filter(libro -> libro.getStock() >= stock).forEach(libro -> System.out.println(libro));
 	}
+
 	/**
-	 * Opción 4: muestra los libros con un precio entre un mínimo y un máximo.
+	 * Opción 4: Guarda todos los datos de la base de datos txt en una lista y con
+	 * .Stream.Filter filtra para mostrar solo los que están entre el rango de precios
 	 *
-	 * @param sc escáner para leer los datos por teclado
+	 * @param sc   escáner para leer los datos por teclado
 	 * @param ltxt repositorio del fichero de texto
 	 */
 	public static void menu_4(Scanner sc, LibroTXT ltxt) {
@@ -98,10 +110,12 @@ public class MenuTXT {
 		lista.stream().filter(libro -> libro.getPrecio() >= min && libro.getPrecio() <= max)
 				.forEach(libro -> System.out.println(libro));
 	}
+
 	/**
-	 * Opción 3: muestra los libros del autor indicado.
+	 * Opción 3: Guarda todos los datos de la base de datos txt en una lista y con
+	 * .Stream.Filter filtra para mostrar solo los que son del autor indicado
 	 *
-	 * @param sc escáner para leer los datos por teclado
+	 * @param sc   escáner para leer los datos por teclado
 	 * @param ltxt repositorio del fichero de texto
 	 */
 	public static void menu_3(Scanner sc, LibroTXT ltxt) {
@@ -111,10 +125,12 @@ public class MenuTXT {
 		lista.stream().filter(libro -> libro.getAutor().equalsIgnoreCase(autor))
 				.forEach(libro -> System.out.println(libro));
 	}
+
 	/**
-	 * Opción 2: muestra los libros con el título indicado.
+	 * Opción 2: Guarda todos los datos de la base de datos txt en una lista y con
+	 * .Stream.Filter filtra para mostrar solo los que tienen el título indicado
 	 *
-	 * @param sc escáner para leer los datos por teclado
+	 * @param sc   escáner para leer los datos por teclado
 	 * @param ltxt repositorio del fichero de texto
 	 */
 	public static void menu_2(Scanner sc, LibroTXT ltxt) {
@@ -124,8 +140,10 @@ public class MenuTXT {
 		lista.stream().filter(libro -> libro.getTitulo().equalsIgnoreCase(titulo))
 				.forEach(libro -> System.out.println(libro));
 	}
+
 	/**
-	 * Opción 1: muestra todos los libros.
+	 * Opción 1: Guarda todos los datos de la base de datos txt en una lista y con
+	 * .Stream.forEach muestra todos los lobros
 	 *
 	 * @param ltxt repositorio del fichero de texto
 	 */

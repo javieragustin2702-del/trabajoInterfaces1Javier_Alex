@@ -18,8 +18,9 @@ import modelo.Libro;
  */
 public class MenuSQL {
 	/**
-	 * Opción 8: copia todos los libros de la base de datos al fichero de texto.
-	 *
+	 * Opción 8: Guarda todos los datos de la base de datos de MySQL en una lista
+	 * para insertalos todos después en la base de datos txt con .Stream.forEach
+	 * 
 	 * @param lsql repositorio de la base de datos (origen)
 	 * @param ltxt repositorio del fichero de texto (destino)
 	 */
@@ -29,8 +30,10 @@ public class MenuSQL {
 	}
 
 	/**
-	 * Opción 7: elimina un libro por su título. Si hay varios con el mismo título,
-	 * pide el id del que se quiere eliminar.
+	 * Opción 7: Pide un título para obtener una lista con todos los libros, filtra
+	 * con un Stream.filter por titulo y si hay más de 1, pide el id para eliminar
+	 * según su id. La forma de eliminar es un .Stream.Filter.forEach a una lista
+	 * con todos los libros
 	 *
 	 * @param sc   escáner para leer los datos por teclado
 	 * @param lsql repositorio de la base de datos
@@ -83,8 +86,10 @@ public class MenuSQL {
 	}
 
 	/**
-	 * Opción 5: muestra los libros con un stock igual o superior al indicado.
-	 *
+	 * Opción 5: Guarda todos los datos de la base de datos de MySQL en una lista y
+	 * con .Stream.Filter filtra para mostrar solo los que tiene el mismo o mayor
+	 * stock al indicado *
+	 * 
 	 * @param sc   escáner para leer los datos por teclado
 	 * @param lsql repositorio de la base de datos
 	 */
@@ -96,8 +101,10 @@ public class MenuSQL {
 	}
 
 	/**
-	 * Opción 4: muestra los libros con un precio entre un mínimo y un máximo.
-	 *
+	 * Opción 4: Guarda todos los datos de la base de datos de MySQL en una lista y
+	 * con .Stream.Filter filtra para mostrar solo los que están entre el rango de
+	 * precios
+	 * 
 	 * @param sc   escáner para leer los datos por teclado
 	 * @param lsql repositorio de la base de datos
 	 */
@@ -112,8 +119,9 @@ public class MenuSQL {
 	}
 
 	/**
-	 * Opción 3: muestra los libros del autor indicado.
-	 *
+	 * Opción 3: Guarda todos los datos de la base de datos de MySQL en una lista y
+	 * con .Stream.Filter filtra para mostrar solo los que son del autor indicado
+	 * 
 	 * @param sc   escáner para leer los datos por teclado
 	 * @param lsql repositorio de la base de datos
 	 */
@@ -125,8 +133,9 @@ public class MenuSQL {
 	}
 
 	/**
-	 * Opción 2: muestra los libros con el título indicado.
-	 *
+	 * Opción 2: Guarda todos los datos de la base de datos de MySQL en una lista y
+	 * con .Stream.Filter filtra para mostrar solo los que tienen el título indicado
+	 * 
 	 * @param sc   escáner para leer los datos por teclado
 	 * @param lsql repositorio de la base de datos
 	 */
@@ -138,8 +147,9 @@ public class MenuSQL {
 	}
 
 	/**
-	 * Opción 1: muestra todos los libros.
-	 *
+	 * Opción 1: Guarda todos los datos de la base de datos de MySQL en una lista y con
+	 * .Stream.forEach muestra todos los lobros
+	 * 
 	 * @param lsql repositorio de la base de datos
 	 */
 	public static void menu_1(LibroSQL lsql) {
