@@ -24,7 +24,7 @@ public class LibroSQL implements OperacionesBases<Libro> {
 	 * Método que inserta un libro con todos sus datos excepto su id. Para
 	 * ello realiza una inserción a la tabla libro insertando
 	 * los valores de titulo,autor,precio y stock del {@code Libro} que
-	 * se le ha pasado al método
+	 * se le ha pasado al método al pasarle un {@code Libro}
 	 * 
 	 * @return True o false según se haya podido insertar el libro o no
 	 * @exception e en caso de faltar datos del libro o de fallar la conexión o inserción de MySQL
