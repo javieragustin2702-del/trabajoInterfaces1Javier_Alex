@@ -47,7 +47,21 @@ Ahora mismo cada tienda lleva su propia hoja de cálculo y la información no co
 
 ## 3. Reglas de negocio
 
-
+1. Cada libro se identifica por su ISBN, que tiene 13 cifras y no se repite. (§2)
+2. Una editorial publica muchos libros; cada libro lo publica una sola editorial. (§2)
+3. Un libro puede tener uno o varios autores y un autor puede tener varios libros; en cada libro, el autor consta como principal o como colaborador. (§2)
+4. Para cada libro y cada tienda se guarda cuántas copias hay y cuándo se contaron por última vez, en una sola fila por cada pareja libro–tienda. (§3)
+5. Si un libro no está en una tienda, no tiene fila en el inventario de esa tienda; si está pero no quedan copias, tiene una fila con 0 copias (agotado). (§3 y hoja de la §8)
+6. El número de copias de un libro en una tienda no puede ser negativo. (§3)
+7. Una tienda tiene varios empleados; cada empleado trabaja en una sola tienda y, si cambia, solo figura en la nueva. (§4)
+8. El cargo de un empleado solo puede ser librero, cajero o encargado, y su DNI no se repite. (§4)
+9. Todo cliente, sea socio o no, se registra con su nombre y su correo; el correo no se puede repetir y el teléfono es opcional. (§5)
+10. Un cliente es socio si tiene fecha de alta; el que no es socio no la tiene. (§5)
+11. Cada pedido se hace en una sola tienda, lo atiende un solo empleado y lo compra un solo cliente. (§6)
+12. Todo pedido tiene fecha, una forma de pago (efectivo, tarjeta o bizum) y un estado (preparado, entregado o cancelado). (§6)
+13. Un pedido incluye uno o varios libros distintos y, de cada uno, la cantidad pedida, que es como mínimo 1. (§6)
+14. Cada línea de pedido guarda el precio que se cobró realmente por el libro; ese precio no cambia aunque después cambie el precio de catálogo y no puede ser negativo. (§6)
+15. El total de un pedido no se guarda: se calcula sumando cantidad × precio cobrado de todas sus líneas. (§6)
 
 ## 4. Diagrama entidad-relación
 
