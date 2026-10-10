@@ -20,6 +20,15 @@ Elementos o columnas con las que cuentan las tablas(a excepción del id que hace
 | `precio` | `DECIMAL(5,2)` | Sí | Precio del libro, esperando que no haya ningún libro que haya que insertar que cuesta más de 1000€ |
 | `tipo_autor` | `ENUM('principal','colaborador')` | Sí | Típo de autor que escribe según si escribe todo el libro o se encarga de alguna parte solamente |
 ---
+### Autor
+| Columna | Tipo | Obligatorio | Descripción |
+|---|---|:---:|---|
+| `idlibro` | `INT` | Sí | Identificador del libro escrito por el autor |
+| `nombre` | `VARCHAR(45)` | Sí | Nombre del autor |
+| `apellidos` | `VARCHAR(45)` | Sí | Apellidos del autor |
+| `nacionalidad` | `VARCHAR(45)` | Si | Nacionalidad del autor |
+| `nacimiento` | `DATE` | Si | Fecha de nacimiento del autor |
+---
 ### Librería
 | Columna | Tipo | Obligatorio | Descripción |
 |---|---|:---:|---|
@@ -69,6 +78,7 @@ Elementos o columnas con las que cuentan las tablas(a excepción del id que hace
 | `idcliente` | `INT` | Sí | Identificador correspondiente al cliente que recibe la factura |
 | `fecha` | `DATE` | Sí | Fecha en la que se realizó la factura |
 | `tipo_pago` | `ENUM('efectivo','tarjeta','bizum)` | Sí | Método de pago que uso el cliente |
+| `total` | `DECIMAL(10,2)` | Sí | Coste de todos los artículos más el IVA |
 | `estado` | `ENUM('preparado','entregado','cancelado)` | Sí | Estado en el que se encuentra lo comprado por el cliente |
 | `detalles_factura` | VARCHAR(5000) | Si | Los diferentes artículos comprados por el cliente |
 ---
@@ -92,6 +102,133 @@ Decisiones tomadas sobre diferentes elementos de la base de datos
 > **Por qué:** Impide que se inserten espacios o guiones para separar puesto que no entraría el ISBN entero sino.
 > **Decisión descartada:** ISBN de 17 a 20 carácteres.
 ## 9. Datos de prueba
+
+Ejemplo de orden a la hora de meter los datos:
+
+### Editorial
+
+Editorial no depende de nada
+
+```sql
+insert editorial(nombre,pais,teléfono)
+values('editorial pepe','España','976583746'),
+('éditions Baguette','Francia','976583746'),
+('editora El Bicho','Portugal','215837462');
+```
+---
+### Libro
+
+Libro depende de editorial
+
+```sql
+insert libro(isbn,ideditorial,titulo,publicado,paginas,precio,tipo_autor)
+values('9788416345276',1,'Rayuela',2014,200,10.34,'principal'),
+('9783161484100',3,'Ficciones',2020,200,11.99,'principal'),
+('9780143127741',1,'Cuentos de Eva Luna',2000,200,8,'principal'),
+('9788437604947',2,'Antología del cuento',2011,200,13.82,'Colaborador'),
+('9782070360024',1,'La casa de los espíritus',2007,200,15.80,'principal');
+```
+---
+### Autor
+
+Autor depende de libro
+
+```sql
+insert autor(idlibro,nombre,apellidos,nacionalidad,nacimiento)
+values(1,'Julio','Cortázar','Francesa','19140826'),
+(2,'Jorge Luis','Borges','Argentina','18990824'),
+(3,'Isabel','Allende','Chilena','19420802'),
+(4,'Julio','Cortázar','Francesa','19140826'),
+(4,'Jorge Luis','Borges','Argentina','18990824'),
+(5,'Isabel','Allende','Chilena','19420802');
+```
+---
+### Libreria
+
+Librería no depende de nada
+
+```sql
+insert libreria(nombre,direccion,telefono,ciudad)
+values('libreria centro','calle mayor 2','976123456','zaragoza'),
+('libreria ribera','calle alta 14','976123456','zaragoza'),
+('libreria universidad','calle baja 5','976123456','zaragoza');
+```
+---
+### Inventario
+
+Inventario depende de libro y de libreria
+
+```sql
+insert inventario(idlibro,idlibreria,stock,ultimo_conteo)
+values(1,1,8,'20260720'),
+(1,1,8,'20260720'),
+(2,1,2,'20260720'),
+(3,1,0,'20260720'),
+(4,1,4,'20260720'),
+(5,1,10,'20260720'),
+(1,2,1,'20260720'),
+(2,2,5,'20260720'),
+(3,2,3,'20260720'),
+(4,2,0,'20260720'),
+(5,2,9,'20260720'),
+(1,3,8,'20260720'),
+(2,3,1,'20260720'),
+(3,3,6,'20260720'),
+(4,3,10,'20260720'),
+(5,3,0,'20260720');
+```
+---
+### Empleado
+
+Empleado depende de libreria
+
+```sql
+insert empleado(idlibreria,DNI,nombre,apellidos,cargo,fecha_contrato,correo)
+values(1,'48372615Z','Laura','Martín Sánchez','librero','20251010','laura.martin92@gmail.com'),
+(1,'52719483M','Daniel','Romero López','cajero','20241010','daniel.romero87@hotmail.com'),
+(1,'39461827R','Sofía','Navarro Torres','encargado','20220102','sofia.navarro24@gmail.com'),
+(2,'71625384T','Alejandro','Ruiz Moreno','librero','20260630','alejandro.ruiz56@hotmail.com'),
+(2,'26843591P','Carla','Fernández Vega','cajero','20251119','carla.fernandez31@gmail.com'),
+(2,'60517294L','Pablo','Jiménez Castro','encargado','20200303','pablo.jimenez78@hotmail.com'),
+(3,'45281936C','Elena','García Molina','librero','20210821','elena.garcia45@gmail.com'),
+(3,'18374625H','Marcos','Díaz Herrera','cajero','20260901','marcos.diaz19@hotmail.com'),
+(3,'83926147K','Lucía','Ortega Vidal','encargado','20240202','lucia.ortega63@gmail.com');
+```
+---
+### Cliente
+
+Cliente no depende de nada
+
+```sql
+insert cliente(nombre,apellidos,correo)
+values('Andrea','Sánchez Romero','andrea.sanchez38@gmail.com'),
+('Javier','Morales Castillo','javier.morales72@hotmail.com'),
+('Andrea','Sánchez Romero','andrea.sanchez38@gmail.com');
+```
+---
+### Socio
+
+Socio depende de cliente
+
+```sql
+insert socio(idcliente,telefono,fecha_alta)
+values(1,'617111111','20250520'),
+(2,null,'20260706');
+```
+---
+### Factura
+
+Factura depende de librería,empleado y cliente
+
+```sql
+insert factura(idlibreria,idempleado,idcliente,fecha,tipo_pago,total,estado,detalles_factura)
+values(1,2,1,'20261010','efectivo',15.80,'entregado','x1 La casa de los espíritus 15,80'),
+(1,2,2,'20260830','tarjeta',20.68,'cancelado','x2 La rayuela 20.68'),
+(3,8,3,'20260910','bizum',18.34,'preparado','x1 Cuentos de Eva Luna 8, x1 rayuela 10.34'),
+(1,2,2,'20261009','efectivo',13.82,'entregado','x1 Antología del cuento 13.82'),
+(3,8,1,'20261010','efectivo',10.34,'entregado','x1 Rayuela 10.34');
+```
+---
 
 ## 10. Consultas de prueba
 
