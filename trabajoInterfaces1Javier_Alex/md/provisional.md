@@ -161,7 +161,6 @@ Inventario depende de libro y de libreria
 ```sql
 insert inventario(idlibro,idlibreria,stock,ultimo_conteo)
 values(1,1,8,'20260720'),
-(1,1,8,'20260720'),
 (2,1,2,'20260720'),
 (3,1,0,'20260720'),
 (4,1,4,'20260720'),
@@ -223,13 +222,79 @@ Factura depende de librería,empleado y cliente
 ```sql
 insert factura(idlibreria,idempleado,idcliente,fecha,tipo_pago,total,estado,detalles_factura)
 values(1,2,1,'20261010','efectivo',15.80,'entregado','x1 La casa de los espíritus 15,80'),
-(1,2,2,'20260830','tarjeta',20.68,'cancelado','x2 La rayuela 20.68'),
+(2,5,2,'20260830','tarjeta',20.68,'cancelado','x2 La rayuela 20.68'),
 (3,8,3,'20260910','bizum',18.34,'preparado','x1 Cuentos de Eva Luna 8, x1 rayuela 10.34'),
-(1,2,2,'20261009','efectivo',13.82,'entregado','x1 Antología del cuento 13.82'),
+(2,5,1,'20261009','efectivo',13.82,'entregado','x1 Antología del cuento 13.82'),
 (3,8,1,'20261010','efectivo',10.34,'entregado','x1 Rayuela 10.34');
 ```
 ---
 
 ## 10. Consultas de prueba
 
+¿Qué libros tiene la tienda Centro y cuántas copias quedan?
+
+```sql
+select t3.titulo, t2.stock from libreria t1 join inventario t2 on t1.idlibreria = t2.idlibreria join libro t3 on t2.idlibro = t3.idlibro where t1.nombre = 'libreria centro';
+```
+| Titulo | Stock |
+|---|---|
+| Rayuela | 8 |
+| Ficciones | 2 |
+| Cuentos de Eva Luna | 0 |
+| Antología del cuento | 4 |
+| La casa de los espíritus | 10 |
+
+¿Cuánto ha facturado cada tienda este año?
+
+
+```sql
+select t3.titulo, t2.stock from libreria t1 join inventario t2 on t1.idlibreria = t2.idlibreria join libro t3 on t2.idlibro = t3.idlibro where t1.nombre = 'libreria centro';
+```
+| nombre | total_facturado |
+|---|---|
+| libreria centro | 15.80 |
+| libreria ribera | 34.50 |
+| libreria universidad | 28.68 |
+
+
+¿Qué clientes han hecho más de dos pedidos?
+
+```sql
+select t1.nombre, t1.apellidos from cliente t1 join factura t2 on t1.idcliente = t2.idcliente group by t1.idcliente having count(t2.idcliente) > 2;
+```
+| nombre | apellidos |
+|---|---|
+| Andrea | Sánchez Romero |
+
+¿Qué libros están agotados en una tienda pero disponibles en otra?
+
+```sql
+select t3.titulo from libreria t1 join inventario t2 on t1.idlibreria = t2.idlibreria join libro t3 on t2.idlibro = t3.idlibro where t2.stock = 0 and 
+(select s2.stock from libreria s1 join inventario s2 on s1.idlibreria = s2.idlibreria join libro s3 on s2.idlibro = s3.idlibro where s2.idlibro = t2.idlibro and t1.idlibreria != s1.idlibreria limit 1) > 0;
+```
+| nombre |
+|---|
+| Cuentos de Eva Luna |
+| Antología del cuento |
+| AndreLa casa de los espíritusa |
+
+
+¿Qué empleado ha atendido más pedidos?
+
+```sql
+select t1.nombre, t1.apellidos from cliente t1 join factura t2 on t1.idcliente = t2.idcliente group by t1.idcliente having count(t2.idcliente) > 2;
+```
+| nombre | apellidos |
+|---|---|
+| Marcos | Díaz Herrera |
+
+¿Qué autores tienen libros en más de una editorial?
+
+```sql
+select t3.nombre, t3.apellidos from editorial t1 join libro t2 on t1.ideditorial = t2.ideditorial join autor t3 on t2.idlibro = t3.idlibro group by t3.nombre, t3.apellidos having count(distinct t1.ideditorial) > 1;
+```
+| nombre | apellidos |
+|---|---|
+| Jorge Luis | Borges |
+| Julio | Cortázar |
 ## 11. Limitaciones y mejoras futuras
