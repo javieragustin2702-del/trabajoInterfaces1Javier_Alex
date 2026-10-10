@@ -1,6 +1,6 @@
 ## 7. Diccionario de datos
-Elementos o columnas con las que cuentan las tablas(a excepción del id que hace de clave primaria de cada tabla):
 
+Elementos o columnas con las que cuentan las tablas(a excepción del id que hace de clave primaria de cada tabla):
 
 ### Editorial
 | Columna | Tipo | Obligatorio | Descripción |
@@ -25,7 +25,7 @@ Elementos o columnas con las que cuentan las tablas(a excepción del id que hace
 |---|---|:---:|---|
 | `nombre` | `VARCHAR(45)` | Sí | Nombre de la librería |
 | `dirección` | `VARCHAR(45)` | Sí | Direccíon  de la librería para poder localizarla |
-| `teléfono` | `VARCHAR(15)` | Sí | Teléfono de la librería. Cuenta con más de 9 carácteres por los prefijos y números más largos |
+| `teléfono` | `VARCHAR(15)` | Sí | Teléfono de la librería |
 | `ciudad` | `VARCHAR(45)` | Si | Ciudad donde se ubica la librería |
 ---
 ### Inventario
@@ -74,6 +74,23 @@ Elementos o columnas con las que cuentan las tablas(a excepción del id que hace
 ---
 ## 8. Decisiones de diseño
 
+Decisiones tomadas sobre diferentes elementos de la base de datos
+
+> **Decisión:** Se decidio que era el inventario era quien tenía el id del libro.
+> **Por qué:** La idea del inventario es que se sepa cuantas copias hay de cada libro por tienda por lo que lo que importa del inventario no es el id del inventario sino que importa el id del libro + el id de la tienda.
+> **Decisión descartada:** Guardar el id del inventario en el libro
+---
+> **Decisión:** Los detalles de la factura que son los diferentes artículos comprados se guardan en la propia factura.
+> **Por qué:** Simplifica la base de datos y junta todos los elementos de la factura en vez de tenerlos por separado.
+> **Decisión descartada:** Realizar una 9ª tabla que fuese los detalles de la factura.
+---
+> **Decisión:** Los números de teléfono de las diferentes tablas cuentan con más carácteres de los necesarios.
+> **Por qué:** La norma en España es que un número sea de 9 carácteres o de 12 si contamos el prefijo pero si contamos con números de otros paises, ni los prefijos ni la longitud de los números es la misma.
+> **Decisión descartada:** números de teléfono en las tablas de 9 o 12 carácteres.
+---
+> **Decisión:** Número del ISBN guardado con una longitud de 13 carácteres.
+> **Por qué:** Impide que se inserten espacios o guiones para separar puesto que no entraría el ISBN entero sino.
+> **Decisión descartada:** ISBN de 17 a 20 carácteres.
 ## 9. Datos de prueba
 
 ## 10. Consultas de prueba
