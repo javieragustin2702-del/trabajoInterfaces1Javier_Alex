@@ -68,107 +68,219 @@ Ahora mismo cada tienda lleva su propia hoja de cálculo y la información no co
 
 
 ## 5. Modelo lógico
-El modelo tiene 10 tablas. En `autoria`, `inventario` y `linea_pedido` la clave primaria está formada por dos columnas.
+El modelo tiene 10 tablas. En autoria, inventario y linea_pedido la clave primaria está formada por dos columnas.
 
-**`tienda`**
-
-| Columna | Clave | Referencia |
-| :---- | :---- | :---- |
-| `id` | PK |  |
-| `nombre` |  |  |
-| `direccion` |  |  |
-| `telefono` |  |  |
-| `ciudad` |  |  |
-
-**`editorial`**
+*Editorial*
 
 | Columna | Clave | Referencia |
 | :---- | :---- | :---- |
-| `id` | PK |  |
-| `nombre` |  |  |
-| `pais` |  |  |
-| `telefono` |  |  |
+| ideditorial | PK |  |
+| nombre |  |  |
+| pais |  |  |
+| telefono |  |  |
 
-**`autor`**
 
-| Columna | Clave | Referencia |
-| :---- | :---- | :---- |
-| `id` | PK |  |
-| `nombre` |  |  |
-| `nacionalidad` |  |  |
-| `anio_nacimiento` |  |  |
-
-**`libro`**
+*libro*
 
 | Columna | Clave | Referencia |
 | :---- | :---- | :---- |
-| `isbn` | PK |  |
-| `titulo` |  |  |
-| `anio_publicacion` |  |  |
-| `paginas` |  |  |
-| `precio_catalogo` |  |  |
-| `editorial_id` | FK | `editorial.id` |
+| idlibro | PK |  |
+| ISBN |  |  |
+| ideditorial | FK | ideditorial |
+| titulo |  |  |
+| publicado |  |  |
+| paginas |  |  |
+| precio |  |  |
+| tipo_autor |  |  |
 
-**`autoria`**
-
-| Columna | Clave | Referencia |
-| :---- | :---- | :---- |
-| `libro_isbn` | PK, FK | `libro.isbn` |
-| `autor_id` | PK, FK | `autor.id` |
-| `rol` |  |  |
-
-**`inventario`**
+*autor*
 
 | Columna | Clave | Referencia |
 | :---- | :---- | :---- |
-| `tienda_id` | PK, FK | `tienda.id` |
-| `libro_isbn` | PK, FK | `libro.isbn` |
-| `copias` |  |  |
-| `fecha_ultimo_conteo` |  |  |
+| id | PK |  |
+| nombre |  |  |
+| apellidos |  |  |
+| nacionalidad |  |  |
+| nacimiento |  |  |
 
-**`empleado`**
-
-| Columna | Clave | Referencia |
-| :---- | :---- | :---- |
-| `dni` | PK |  |
-| `nombre` |  |  |
-| `apellidos` |  |  |
-| `cargo` |  |  |
-| `fecha_contratacion` |  |  |
-| `correo` |  |  |
-| `tienda_id` | FK | `tienda.id` |
-
-**`cliente`**
+*libreria*
 
 | Columna | Clave | Referencia |
 | :---- | :---- | :---- |
-| `id` | PK |  |
-| `nombre` |  |  |
-| `correo` | UNIQUE |  |
-| `telefono` |  |  |
-| `fecha_alta` |  |  |
+| idlibreria | PK |  |
+| nombre |  |  |
+| direccion |  |  |
+| telefono |  |  |
 
-El teléfono es opcional y, si `fecha_alta` está vacía, el cliente no es socio.
-
-**`pedido`**
+*inventario*
 
 | Columna | Clave | Referencia |
 | :---- | :---- | :---- |
-| `id` | PK |  |
-| `fecha` |  |  |
-| `forma_pago` |  |  |
-| `estado` |  |  |
-| `tienda_id` | FK | `tienda.id` |
-| `empleado_dni` | FK | `empleado.dni` |
-| `cliente_id` | FK | `cliente.id` |
+| idinventario | PK |  |
+| idlibro | FK | idlibro |
+| idlibreria | FK | idlibreria |
+| stock |  |  |
+| ultimo_conteo |  |  |
 
-**`linea_pedido`**
+*empleado*
 
 | Columna | Clave | Referencia |
 | :---- | :---- | :---- |
-| `pedido_id` | PK, FK | `pedido.id` |
-| `libro_isbn` | PK, FK | `libro.isbn` |
-| `cantidad` |  |  |
-| `precio_cobrado` |  |  |
+| idempleado | PK |  |
+| idlibreria | FK | idlibreria |
+| DNI |  |  |
+| nombre |  |  |
+| apellidos |  |  |
+| cargo |  |  |
+| fecha_contrato |  |  |
+| correo |  |  |
+
+*cliente*
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| idcliente | PK |  |
+| nombre |  |  |
+| apellidos |  |  |
+| correo |  |  |
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| idsocio | PK |  |
+| idcliente | |  |
+| telefono |  |  |
+| fecha_alta |  |  |
+
+*factura*
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| idfactura | PK |  |
+| idlibreria | FK | idlibreria |
+| idempleado | FK | idempleado |
+| idcliente | FK | idcliente |
+| fecha |  |  |
+| tipo_pago |  |  |
+| total |  |  |
+| estado |  |  |
+| detalles_factura |  |  |
 
 ## 6. Script SQL (schema.sql)
+El script completo está en [`schema.sql`](schema.sql). Borra y vuelve a crear la base de datos `libreria` con sus 9 tablas, en un orden que respeta las claves foráneas: primero las que no dependen de otras (`editorial`, `libreria` y `cliente`) y después `libro`, `autor`, `empleado`, `inventario`, `socio` y `factura`. Se usan claves primarias con `AUTO_INCREMENT`, claves foráneas, `UNIQUE` para el ISBN, `NOT NULL` y `ENUM` para los valores fijos (cargo, tipo de pago, estado y tipo de autor). Aquí se muestran solo las sentencias de creación; al final de `schema.sql` están los `INSERT` de los datos de prueba (apartado 9).
+
+```sql
+-- Base de datos de la libreria Paginas de Villa Serena
+-- Se puede ejecutar varias veces: borra y recrea la base de datos.
+DROP DATABASE IF EXISTS libreria;
+CREATE DATABASE libreria DEFAULT CHARACTER SET utf8mb4;
+USE libreria;
+
+-- 1. Tablas que no dependen de otras
+CREATE TABLE editorial (
+  ideditorial  int          NOT NULL AUTO_INCREMENT,
+  nombre       varchar(45)  NOT NULL,
+  pais         varchar(45)  NOT NULL,
+  teléfono     varchar(15)  NOT NULL,
+  PRIMARY KEY (ideditorial)
+);
+
+CREATE TABLE libreria (
+  idlibreria  int          NOT NULL AUTO_INCREMENT,
+  nombre      varchar(45)  NOT NULL,
+  direccion   varchar(45)  NOT NULL,
+  telefono    varchar(15)  NOT NULL,
+  ciudad      varchar(45)  NOT NULL,
+  PRIMARY KEY (idlibreria)
+);
+
+CREATE TABLE cliente (
+  idcliente  int           NOT NULL AUTO_INCREMENT,
+  nombre     varchar(45)   NOT NULL,
+  apellidos  varchar(50)   NOT NULL,
+  correo     varchar(100)  NOT NULL,
+  PRIMARY KEY (idcliente)
+);
+
+-- 2. Tablas que dependen de las anteriores (el orden respeta las claves foraneas)
+CREATE TABLE libro (
+  idlibro      int           NOT NULL AUTO_INCREMENT,
+  ISBN         varchar(13)   NOT NULL,
+  ideditorial  int           NOT NULL,
+  titulo       varchar(45)   NOT NULL,
+  publicado    year          NOT NULL,
+  paginas      int           NOT NULL,
+  precio       decimal(5,2)  NOT NULL,
+  tipo_autor   enum('Principal','colaborador')  NOT NULL,
+  PRIMARY KEY (idlibro),
+  UNIQUE KEY ISBN_UNIQUE (ISBN),
+  KEY fk_libro_ideditorial_idx (ideditorial),
+  CONSTRAINT fk_libro_ideditorial FOREIGN KEY (ideditorial) REFERENCES editorial (ideditorial)
+);
+
+CREATE TABLE autor (
+  idautor       int          NOT NULL AUTO_INCREMENT,
+  idlibro       int          NOT NULL,
+  nombre        varchar(45)  NOT NULL,
+  apellidos     varchar(45)  NOT NULL,
+  nacionalidad  varchar(45)  NOT NULL,
+  nacimiento    date         NOT NULL,
+  PRIMARY KEY (idautor),
+  KEY fk_autor_idlibro_idx (idlibro),
+  CONSTRAINT fk_autor_idlibro FOREIGN KEY (idlibro) REFERENCES libro (idlibro)
+);
+
+CREATE TABLE empleado (
+  idempleado      int           NOT NULL AUTO_INCREMENT,
+  idlibreria      int           NOT NULL,
+  DNI             varchar(9)    NOT NULL,
+  nombre          varchar(45)   NOT NULL,
+  apellidos       varchar(45)   NOT NULL,
+  cargo           enum('librero','cajero','encargado')  NOT NULL,
+  fecha_contrato  date          NOT NULL,
+  correo          varchar(100)  NOT NULL,
+  PRIMARY KEY (idempleado),
+  KEY fk_empleado_idlibreria_idx (idlibreria),
+  CONSTRAINT fk_empleado_idlibreria FOREIGN KEY (idlibreria) REFERENCES libreria (idlibreria)
+);
+
+CREATE TABLE inventario (
+  idinventario   int   NOT NULL AUTO_INCREMENT,
+  idlibro        int   NOT NULL,
+  idlibreria     int   NOT NULL,
+  stock          int   NOT NULL,
+  ultimo_conteo  date  NOT NULL,
+  PRIMARY KEY (idinventario),
+  KEY fk_inventario_idlibreria_idx (idlibreria),
+  KEY fk_inventario_idlibro_idx (idlibro),
+  CONSTRAINT fk_inventario_idlibreria FOREIGN KEY (idlibreria) REFERENCES libreria (idlibreria),
+  CONSTRAINT fk_inventario_idlibro FOREIGN KEY (idlibro) REFERENCES libro (idlibro)
+);
+
+CREATE TABLE socio (
+  idsocio     int          NOT NULL AUTO_INCREMENT,
+  idcliente   int          NOT NULL,
+  telefono    varchar(15)  DEFAULT NULL,
+  fecha_alta  date         NOT NULL,
+  PRIMARY KEY (idsocio),
+  KEY fk_socio_idcliente_idx (idcliente),
+  CONSTRAINT fk_socio_idcliente FOREIGN KEY (idcliente) REFERENCES cliente (idcliente)
+);
+
+CREATE TABLE factura (
+  idfactura         int            NOT NULL AUTO_INCREMENT,
+  idlibreria        int            NOT NULL,
+  idempleado        int            NOT NULL,
+  idcliente         int            NOT NULL,
+  fecha             date           NOT NULL,
+  tipo_pago         enum('efectivo','tarjeta','bizum')  NOT NULL,
+  total             decimal(10,2)  NOT NULL,
+  estado            enum('preparado','entregado','cancelado')  NOT NULL,
+  detalles_factura  varchar(5000)  NOT NULL,
+  PRIMARY KEY (idfactura),
+  KEY fk_factura_idlibreria_idx (idlibreria),
+  KEY fk_factura_idempleado_idx (idempleado),
+  KEY fk_factura_idcliente_idx (idcliente),
+  CONSTRAINT fk_factura_idcliente FOREIGN KEY (idcliente) REFERENCES cliente (idcliente),
+  CONSTRAINT fk_factura_idempleado FOREIGN KEY (idempleado) REFERENCES empleado (idempleado),
+  CONSTRAINT fk_factura_idlibreria FOREIGN KEY (idlibreria) REFERENCES libreria (idlibreria)
+);
