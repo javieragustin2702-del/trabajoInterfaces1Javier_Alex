@@ -298,3 +298,13 @@ select t3.nombre, t3.apellidos from editorial t1 join libro t2 on t1.ideditorial
 | Jorge Luis | Borges |
 | Julio | Cortázar |
 ## 11. Limitaciones y mejoras futuras
+
+cosas a mejorar o cambiar:
+
+1. Cambiar como funciona el inventario porque actualmente hay se general mas inventarios de los que hay realmente por lo lógico sería hacer una tabla más que fuese los detalles de cada inventario y ahi guardar cada libro y el stock y en la tabla del inventario solo estaría la fecha de revisión. Esto a la hora del crecimiento de la base de datos ayudaría a poder llevar mejor las revisiones de los inventarios
+
+2. Con autor ocurre que los autores se repiten si han escrito más de un libro por lo que habría que hacer una tabla más que relacionase libro y autor, dejando autor como una tabla con todo menos el id del libro y la tabla nueva tendria la relación entre el id del libro y del autor
+
+3. La gestión de la factura con la columna de detalles_factura, si bien ahorra una tabla es un poco desastroso porque no puedes relacionar luego que se ha vendido por lo que sería necesario otra tabla que relaciona factura con libro y tuviese una columna de copias para indicar cuántas copias de un libro se han comprado para asi poder reducir el stock del inventario
+
+Con todos estos cambios **mejorariamos** la escalabilidad de la base y por lo tanto su **crecimiento**
