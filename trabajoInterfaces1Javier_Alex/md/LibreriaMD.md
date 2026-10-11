@@ -64,9 +64,111 @@ Ahora mismo cada tienda lleva su propia hoja de cálculo y la información no co
 15. El total de un pedido no se guarda: se calcula sumando cantidad × precio cobrado de todas sus líneas. (§6)
 
 ## 4. Diagrama entidad-relación
+![[Libreria Entidad-Relacion.png]]
+
 
 ## 5. Modelo lógico
+El modelo tiene 10 tablas. En `autoria`, `inventario` y `linea_pedido` la clave primaria está formada por dos columnas.
+
+**`tienda`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `id` | PK |  |
+| `nombre` |  |  |
+| `direccion` |  |  |
+| `telefono` |  |  |
+| `ciudad` |  |  |
+
+**`editorial`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `id` | PK |  |
+| `nombre` |  |  |
+| `pais` |  |  |
+| `telefono` |  |  |
+
+**`autor`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `id` | PK |  |
+| `nombre` |  |  |
+| `nacionalidad` |  |  |
+| `anio_nacimiento` |  |  |
+
+**`libro`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `isbn` | PK |  |
+| `titulo` |  |  |
+| `anio_publicacion` |  |  |
+| `paginas` |  |  |
+| `precio_catalogo` |  |  |
+| `editorial_id` | FK | `editorial.id` |
+
+**`autoria`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `libro_isbn` | PK, FK | `libro.isbn` |
+| `autor_id` | PK, FK | `autor.id` |
+| `rol` |  |  |
+
+**`inventario`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `tienda_id` | PK, FK | `tienda.id` |
+| `libro_isbn` | PK, FK | `libro.isbn` |
+| `copias` |  |  |
+| `fecha_ultimo_conteo` |  |  |
+
+**`empleado`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `dni` | PK |  |
+| `nombre` |  |  |
+| `apellidos` |  |  |
+| `cargo` |  |  |
+| `fecha_contratacion` |  |  |
+| `correo` |  |  |
+| `tienda_id` | FK | `tienda.id` |
+
+**`cliente`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `id` | PK |  |
+| `nombre` |  |  |
+| `correo` | UNIQUE |  |
+| `telefono` |  |  |
+| `fecha_alta` |  |  |
+
+El teléfono es opcional y, si `fecha_alta` está vacía, el cliente no es socio.
+
+**`pedido`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `id` | PK |  |
+| `fecha` |  |  |
+| `forma_pago` |  |  |
+| `estado` |  |  |
+| `tienda_id` | FK | `tienda.id` |
+| `empleado_dni` | FK | `empleado.dni` |
+| `cliente_id` | FK | `cliente.id` |
+
+**`linea_pedido`**
+
+| Columna | Clave | Referencia |
+| :---- | :---- | :---- |
+| `pedido_id` | PK, FK | `pedido.id` |
+| `libro_isbn` | PK, FK | `libro.isbn` |
+| `cantidad` |  |  |
+| `precio_cobrado` |  |  |
 
 ## 6. Script SQL (schema.sql)
-
-¡
