@@ -23,7 +23,7 @@ El manual enseña como instalar el programa asi como a configurarlo y mantenerlo
 5. comprueba que todo puede ser gestionado con el powershell haciendo **-java version**,**--sql version**,**--git version**. Si no funciona alguno ves a la variables de entorno y añade a la variable **Path** la ruta del archivo **bin** del programa
 
 ## Estructura del proyecto
-
+```
 trabajoInterfaces1Javier_Alex
 | 
 +---doc Contiene todos los datos del javadoc
@@ -62,7 +62,7 @@ trabajoInterfaces1Javier_Alex
 +---bases.txt La base de datos TXT que maneja el programa
 |
 \---Esquema librería tarea 1.sql Script de MySQL que crea la base de datos de la tarea 1
-
+```
 ## Obtención del código
 
 Ves a **Code**,copia el enlace que sale,ves a la carpeta del espacio de trabajo para el eclipse,escribe **powershell** en la ruta del archivo y escribe **git clone**. Abre el eclipse e importa el proyecto como un proyecto ya existente en el ordenador
