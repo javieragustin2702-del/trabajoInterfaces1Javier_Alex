@@ -32,3 +32,31 @@ Ves a **Code**,copia el enlace que sale,ves a la carpeta del espacio de trabajo 
 ## Librerías
 
 Hay 2 que son el dotenv-java-3.2.0 para leer y manejar el **.env**  y el mysql-connector-j.26.7.0 que conecta java con MYSQL y permite la gestión de la base de datos. No hay que configurar las rutas de la librerias ya que usa la ruta dentro del proyecto
+
+## Inicialización de la base de datos
+
+En este apartado usaremos el script de sql “Esquema Libreria.sql” ubicado en trabajoInterfaces1Javier_Alex\trabajoInterfaces1Javier_Alex\md (es la ruta relativa del proyecto) y lo insertaremos a la base de datos desde MySQL Workbench.
+
+## Configuración con .env
+
+| DB_URL | Donde se ubique la base de datos |
+| DB_USER | El usuario usado |
+| DB_PASS | La contraseña |
+
+## Arranque de la aplicación
+
+Usaremos eclipse en vez de Netbeans por que es el que hemos usado en todo el proyecto. Usaremos Project → Clean, es importante que Build Automatically este importante.
+Con esto ya funcionara
+
+## Comprobación del despliegue
+
+Comprobaremos que el programa funciona perfectamente
+
+## Administración
+
+Crearemos una carpeta que se llame backups
+Para crear un backup usaremos --> mysqldump -u root -p --result-file=C:\backups\libreria_corta2026-10-25.sql libreria_corta 
+Para restaurar el backup usaremos --> mysql -u root -p < C:\backups\libreria_corta2026-10-25.sql libreria_corta
+Volveremos a los datos iniciales --> mysql -u root -p < "trabajoInterfaces1Javier_Alex\esquema libreria tarea 1.sql"
+Abriremos el directorio desde la cmd y usaremos el comando copy luego con dir comprobaremos que se haya copiado bien
+Ejecutaremos el programa y el daremos a la opcion 8.
