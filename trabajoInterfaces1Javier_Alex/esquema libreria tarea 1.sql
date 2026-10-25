@@ -1,3 +1,4 @@
+select 'Si es la primera que pasas esto no pasa nada pero sino aviso de que se perderán todos los datos posteriores a cuando se apso el script' as AVISO;
 CREATE DATABASE  IF NOT EXISTS `libreria_corta` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
 USE `libreria_corta`;
 -- MySQL dump 10.13  Distrib 8.0.46, for Win64 (x86_64)
