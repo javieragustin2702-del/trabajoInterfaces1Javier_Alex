@@ -24,6 +24,44 @@ El manual enseña como instalar el programa asi como a configurarlo y mantenerlo
 
 ## Estructura del proyecto
 
+trabajoInterfaces1Javier_Alex
+| 
++---doc Contiene todos los datos del javadoc
+|     |---index.html Contiene la documentación
+|
++---librerías Tiene las librerías del proyecto
+|       |---dotenv-java-3.2.0.jar Librería que permite la gestión y/o lectura de los archivos .env
+|       |---mysql-connector-j-26.7.0.jar Librería que permite la conexión de MySQL con java
+|
++---md Contiene todos los datos con respecto a la tarea 3
+|     |---Esquema Libreria.sql Script de MySQL que contiene la base de datos de la tarea 3
+|     |---Libreria Entidad-Relacion.png Imagen del modelo entidad-relación de la tarea 3
+|     |---LibreriaMD.md Archivo .md que contiene toda la información de la tarea 3
+|
++---src Código fuente del proyecto
+|    +---clasesBases Contiene las clases que gestionan la base de datos
+|    |       LibroSQL.java Clase que maneja la base de datos SQL
+|    |       LibroTXT.java Clase que maneja la base de datos TXT
+|    |       OperacionesBases.java Interfaz que da las funciones a las clases que gestionan las bases de datos
+|    |
+|    +---conexiones Contiene la conexión de Java con MySQL
+|    |       Conexion.java Clase que permite la conexión de java con MySQL
+|    |
+|    +---main Contiene el código con el que se maneja el programa
+|    |       Main.java Clase que maneja el programa
+|    |       MenuSQL.java Clase que contiene todas las funciones del menú de MySQL
+|    |       MenuTXT.java Clase que contiene todas las funciones del menú TXT
+|    |
+|    \---modelo Contiene los objetos necesarios para java para gestionar los libros
+|            Libro.java Clase que permite la creación de objetos que sean libros
+|
++---.env Archivo que no está en GitHub que tiene que contener la URL,usuario y contraseña de MySQL
+|
++---.env.example Archivo que es un ejemplo de como es el .env
+|
++---bases.txt La base de datos TXT que maneja el programa
+|
+\---Esquema librería tarea 1.sql Script de MySQL que crea la base de datos de la tarea 1
 
 ## Obtención del código
 
