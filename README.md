@@ -39,6 +39,8 @@ En este apartado usaremos el script de sql “Esquema Libreria.sql” ubicado en
 
 ## Configuración con .env
 
+| Nombre | Funcion |
+|---|---|
 | DB_URL | Donde se ubique la base de datos |
 | DB_USER | El usuario usado |
 | DB_PASS | La contraseña |
