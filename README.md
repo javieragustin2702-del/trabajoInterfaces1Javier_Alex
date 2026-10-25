@@ -56,7 +56,11 @@ Comprobaremos que el programa funciona perfectamente
 
 Crearemos una carpeta que se llame backups
 Para crear un backup usaremos --> mysqldump -u root -p --result-file=C:\backups\libreria_corta2026-10-25.sql libreria_corta 
+
 Para restaurar el backup usaremos --> mysql -u root -p < C:\backups\libreria_corta2026-10-25.sql libreria_corta
+
 Volveremos a los datos iniciales --> mysql -u root -p < "trabajoInterfaces1Javier_Alex\esquema libreria tarea 1.sql"
+
 Abriremos el directorio desde la cmd y usaremos el comando copy luego con dir comprobaremos que se haya copiado bien
+
 Ejecutaremos el programa y el daremos a la opcion 8.
