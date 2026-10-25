@@ -66,3 +66,16 @@ Volveremos a los datos iniciales --> mysql -u root -p < "trabajoInterfaces1Javie
 Abriremos el directorio desde la cmd y usaremos el comando copy luego con dir comprobaremos que se haya copiado bien
 
 Ejecutaremos el programa y el daremos a la opcion 8.
+
+## Posibles errores y soluciones
+
+| Error | Causa | Solución |
+|---|---|---|
+| io.github.cdimascio.dotenv.DotenvException: | No existe o no encuentra el .env | Abrir la carpeta de la raíz del archivo y comprobar o crear el “.env”. |
+| java.sql.SQLException: Access denied for user 'root'@'localhost' (using password: YES) | Error en la contraseña del .env | Poner la contraseña correcta. |
+| java.sql.SQLSyntaxErrorException: Unknown database | No encuentra la base de datos | Pasar el Script de la base de datos |
+| No suitable driver found for jdbc:mysql://localhost:3306/interfaces1 | Se eliminó del proyecto la librería que permitía la conexión con la base de datos | Poner el el buildpath la librería otra vez o volver a clonar el repositorio |
+| mysql no se reconoce como comando en powershell | No se añadió su variable de entorno al path | Añadir al path la ruta del bin |
+| java.lang.NumberFormatException | Se puso por consola algo que no era un número cuando pedían un número | Poner un número en vez de otra cosa |
+| mysqldump: Can't create/write to file 'C:\libreria_corta_2026-10-25' (OS errno 13 - Permission denied) | Se intenta crear fuera del usuario y windows no acepta la creación de la carpeta fuera del usuario | Crear la copia de seguridad dentro del usuario |
+| The last packet sent successfully to the server was 0 milliseconds ago. The driver has not received any packets from the server. (Error que sale en el Eclipse a la hora de pedirle una conexión a mysql) | El MYSQL80 no está ejecutándose | Ir a servicios e iniciar el servicio |
